@@ -2,7 +2,7 @@ import 'package:trust_food/models/seller/workScale.dart';
 
 class Seller {
   final int id;
-  final String userName;
+  final String username;
   final String email;
   final String phone;
   final String profileImage;
@@ -11,7 +11,7 @@ class Seller {
 
   Seller({
     required this.id,
-    required this.userName,
+    required this.username,
     required this.email,
     required this.phone,
     required this.profileImage,
@@ -23,7 +23,7 @@ class Seller {
   factory Seller.fromJson(Map<String, dynamic> json) {
     return Seller(
       id: json['id'],
-      userName: json['userName'],
+      username: json['username'],
       email: json['email'],
       phone: json['phone'],
       profileImage: json['profileImage'],
@@ -36,7 +36,7 @@ class Seller {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'userName': userName,
+      'username': username,
       'email': email,
       'phone': phone,
       'profileImage': profileImage,
