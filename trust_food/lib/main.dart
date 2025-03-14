@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:trust_food/screens/home/buyerHome.dart';
 import 'package:trust_food/screens/home/sellerHome.dart';
 import 'package:trust_food/screens/login/loginScreen.dart';
+import 'package:trust_food/screens/selection/selectUser.dart';
 
 void main() {
   runApp(MyApp());
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
           headlineSmall: TextStyle(fontSize: 16.0, color: Colors.black),
         ),
       ),
-      home: LoginScreen(),
+      home: Selectuser(),
     );
   }
 }
