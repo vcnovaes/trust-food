@@ -1,5 +1,6 @@
-
 import 'package:flutter/material.dart';
+import 'package:trust_food/models/seller/seller.dart';
+import 'package:trust_food/models/seller/workScale.dart';
 import 'package:trust_food/screens/home/buyerHome.dart';
 import 'package:trust_food/screens/home/sellerHome.dart';
 import 'package:trust_food/screens/signup/commonSignUp.dart';
@@ -8,7 +9,6 @@ class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
-
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
@@ -20,13 +20,29 @@ class _LoginScreenState extends State<LoginScreen> {
     if (_formKey.currentState?.validate() ?? false) {
       _formKey.currentState?.save();
       // Here you would typically check the user credentials from Firebase
-      String userType = "buyer"; // Example user type (replace with actual check)
-      
+      String userType =
+          "buyer"; // Example user type (replace with actual check)
+
       // Navigate based on user type
       if (_email == "seller@email.com") {
+        var mockSeller = new Seller(
+          id: "mockId",
+          username: "PastelDaSônia",
+          email: "pastel@pastel.com",
+          phone: "(81)9999-9999",
+          profileImage: "",
+          workScale: new WorkScale(
+            startTime: new TimeOfDay(hour: 10, minute: 0),
+            endTime: new TimeOfDay(hour: 18, minute: 30),
+            workDays: [],
+          ),
+        );
+
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => SellerHomePage()),
+          MaterialPageRoute(
+            builder: (context) => SellerHomePage(seller: mockSeller),
+          ),
         );
       } else {
         Navigator.pushReplacement(
@@ -99,16 +115,16 @@ class _LoginScreenState extends State<LoginScreen> {
 
               // Login button
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly, // Spaces buttons evenly
+                mainAxisAlignment:
+                    MainAxisAlignment.spaceEvenly, // Spaces buttons evenly
                 children: [
-                  ElevatedButton(
-                    onPressed: _login,
-                    child: Text("Login"),
-                  ),
+                  ElevatedButton(onPressed: _login, child: Text("Login")),
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.push(context, 
-                      MaterialPageRoute(builder: (context) => SignUpCommon()));  
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SignUpCommon()),
+                      );
                     },
                     child: Text("Sign Up"),
                   ),

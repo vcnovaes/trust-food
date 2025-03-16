@@ -1,7 +1,7 @@
 import 'package:trust_food/models/seller/workScale.dart';
 
 class Seller {
-  final int id;
+  final String id;
   final String username;
   final String email;
   final String phone;
@@ -16,7 +16,7 @@ class Seller {
     required this.phone,
     required this.profileImage,
     required this.workScale,
-    this.publicContact
+    this.publicContact,
   });
 
   // Factory constructor to create a User from JSON
@@ -28,7 +28,7 @@ class Seller {
       phone: json['phone'],
       profileImage: json['profileImage'],
       publicContact: json['publicContact'],
-      workScale: WorkScale.fromJson(json['workScale'])
+      workScale: WorkScale.fromJson(json['workScale']),
     );
   }
 
@@ -41,7 +41,7 @@ class Seller {
       'phone': phone,
       'profileImage': profileImage,
       'publicContact': publicContact,
-      'workScale': workScale.toJson()
+      'workScale': workScale.toJson(),
     };
   }
 }
