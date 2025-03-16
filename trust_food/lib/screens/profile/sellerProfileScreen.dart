@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trust_food/models/seller/seller.dart';
+import 'package:trust_food/screens/profile/sellerReviewScreen.dart';
 
 class SellerProfileScreen extends StatelessWidget {
   final Seller seller;
@@ -34,11 +35,43 @@ class SellerProfileScreen extends StatelessWidget {
             buildDetailRow('Telefone', seller.phone),
             const SizedBox(height: 32),
             TextButton.icon(
-              onPressed: (() => {}),
+              onPressed:
+                  (() => {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder:
+                            (context) => SellerReviewsScreen(
+                              sellerName: seller.username,
+                            ),
+                      ),
+                    ),
+                  }),
               icon: const Icon(Icons.delete, color: Colors.red),
               label: const Text(
                 'Deletar conta',
                 style: TextStyle(color: Colors.red),
+              ),
+            ),
+            const SizedBox(height: 32),
+            TextButton.icon(
+              onPressed:
+                  (() => {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder:
+                            (context) => SellerReviewsScreen(
+                              sellerName: seller.username,
+                            ),
+                      ),
+                    ),
+                  }),
+
+              icon: const Icon(Icons.message, color: Colors.blue),
+              label: const Text(
+                'Ver avaliações',
+                style: TextStyle(color: Colors.blue),
               ),
             ),
           ],
