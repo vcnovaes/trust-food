@@ -9,33 +9,30 @@ class QRCodeScannerPage extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          // Background Image (ler_qr) inside a Container to control size
           Positioned.fill(
             child: Container(
-              width: double.infinity,  // Ensures it spans the width of the screen
-              height: double.infinity, // Ensures it spans the height of the screen
+              width: double.infinity,
+              height: double.infinity,
               child: Image.asset(
-                'assets/ler_qr.png', // Ensure the image is in the assets folder
-                fit: BoxFit.fill,  // This will stretch the image to fill the entire screen
+                'assets/ler_qr.png',
+                fit: BoxFit.fill,
               ),
             ),
           ),
-          // Back Button (voltar.png) with increased size
           Positioned(
             top: 40,
             left: 16,
             child: GestureDetector(
               onTap: () {
-                Navigator.pop(context); // Go back to the BuyerHomePage
+                Navigator.pop(context);
               },
               child: Image.asset(
-                'assets/voltar.png', // Ensure the image is in the assets folder
-                width: 100,  // Increased width
-                height: 100, // Increased height
+                'assets/voltar.png',
+                width: 100,
+                height: 100,
               ),
             ),
           ),
-          // Add other widgets/elements you need here (e.g., QR code scanner)
         ],
       ),
     );
