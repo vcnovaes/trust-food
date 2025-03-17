@@ -48,8 +48,6 @@ abstract class $SellerModelCopyWith<$Res> {
     bool? publicContact,
     WorkScaleModel workScale,
   });
-
-  $WorkScaleModelCopyWith<$Res> get workScale;
 }
 
 /// @nodoc
@@ -73,7 +71,7 @@ class _$SellerModelCopyWithImpl<$Res, $Val extends SellerModel>
     Object? phone = null,
     Object? profileImage = null,
     Object? publicContact = freezed,
-    Object? workScale = null,
+    Object? workScale = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -108,23 +106,13 @@ class _$SellerModelCopyWithImpl<$Res, $Val extends SellerModel>
                     : publicContact // ignore: cast_nullable_to_non_nullable
                         as bool?,
             workScale:
-                null == workScale
+                freezed == workScale
                     ? _value.workScale
                     : workScale // ignore: cast_nullable_to_non_nullable
                         as WorkScaleModel,
           )
           as $Val,
     );
-  }
-
-  /// Create a copy of SellerModel
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $WorkScaleModelCopyWith<$Res> get workScale {
-    return $WorkScaleModelCopyWith<$Res>(_value.workScale, (value) {
-      return _then(_value.copyWith(workScale: value) as $Val);
-    });
   }
 }
 
@@ -146,9 +134,6 @@ abstract class _$$SellerModelImplCopyWith<$Res>
     bool? publicContact,
     WorkScaleModel workScale,
   });
-
-  @override
-  $WorkScaleModelCopyWith<$Res> get workScale;
 }
 
 /// @nodoc
@@ -171,7 +156,7 @@ class __$$SellerModelImplCopyWithImpl<$Res>
     Object? phone = null,
     Object? profileImage = null,
     Object? publicContact = freezed,
-    Object? workScale = null,
+    Object? workScale = freezed,
   }) {
     return _then(
       _$SellerModelImpl(
@@ -206,7 +191,7 @@ class __$$SellerModelImplCopyWithImpl<$Res>
                 : publicContact // ignore: cast_nullable_to_non_nullable
                     as bool?,
         workScale:
-            null == workScale
+            freezed == workScale
                 ? _value.workScale
                 : workScale // ignore: cast_nullable_to_non_nullable
                     as WorkScaleModel,
@@ -262,8 +247,7 @@ class _$SellerModelImpl extends _SellerModel {
                 other.profileImage == profileImage) &&
             (identical(other.publicContact, publicContact) ||
                 other.publicContact == publicContact) &&
-            (identical(other.workScale, workScale) ||
-                other.workScale == workScale));
+            const DeepCollectionEquality().equals(other.workScale, workScale));
   }
 
   @override
@@ -275,7 +259,7 @@ class _$SellerModelImpl extends _SellerModel {
     phone,
     profileImage,
     publicContact,
-    workScale,
+    const DeepCollectionEquality().hash(workScale),
   );
 
   /// Create a copy of SellerModel

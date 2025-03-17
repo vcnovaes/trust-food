@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:trust_food/src/seller/domain/models/work_scale_model.dart';
+import 'package:trust_food/src/profile/domain/models/work_scale_model.dart';
 
 part 'seller_model.freezed.dart';
 

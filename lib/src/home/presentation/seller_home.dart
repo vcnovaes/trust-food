@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:trust_food/src/profile/presentation/seller_profile_screen.dart';
 
 class SellerHomePage extends StatefulWidget {
   static String route() => '/seller_home';
@@ -8,6 +10,8 @@ class SellerHomePage extends StatefulWidget {
   @override
   SellerHomePageState createState() => SellerHomePageState();
 }
+
+enum SellerPage { dashboard, orders, profile }
 
 class SellerHomePageState extends State<SellerHomePage> {
   int _selectedIndex = 0;
@@ -19,9 +23,23 @@ class SellerHomePageState extends State<SellerHomePage> {
   ];
 
   void _onItemTapped(int index) {
+    if (_selectedIndex == index) return;
+
     setState(() {
       _selectedIndex = index;
     });
+
+    final selectedPage = SellerPage.values[index];
+
+    switch (selectedPage) {
+      case SellerPage.dashboard:
+        break;
+      case SellerPage.orders:
+        break;
+      case SellerPage.profile:
+        context.go(SellerProfileScreen.route());
+        break;
+    }
   }
 
   @override

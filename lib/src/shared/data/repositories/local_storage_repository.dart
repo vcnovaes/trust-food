@@ -18,7 +18,6 @@ class LocalStorageRepository {
       await _secureStorage.delete(key: key.keyName);
       return const Success(true);
     } catch (e) {
-      print('Error deleting key ${key.keyName}: $e');
       return Failure(StorageUnknownError(msg: 'Failed to delete key'));
     }
   }
@@ -29,7 +28,6 @@ class LocalStorageRepository {
       _token = null;
       return const Success(true);
     } catch (e) {
-      print('Error deleting all keys: $e');
       return Failure(StorageUnknownError(msg: 'Failed to delete all keys'));
     }
   }
@@ -46,7 +44,6 @@ class LocalStorageRepository {
         return Success(value);
       }
     } catch (e) {
-      print('Error reading key ${key.keyName}: $e');
       return Failure(StorageUnknownError(msg: 'Failed to read key'));
     }
   }
@@ -65,7 +62,6 @@ class LocalStorageRepository {
       }
       return const Success(true);
     } catch (e) {
-      print('Error writing key ${key.keyName}: $e');
       return Failure(StorageUnknownError(msg: 'Failed to write key'));
     }
   }
