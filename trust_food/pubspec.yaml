@@ -61,6 +61,21 @@ flutter:
   assets:
     - lib/assets/image.png
     - assets/image.png
+    - assets/green_check.png
+    - assets/left_arrow.png
+    - assets/trustfoodlogo.png
+    - assets/map_home_user.png
+    - assets/star.png
+    - assets/qr_code_1.png
+    - assets/ambulante.png
+    - assets/coco_praia.png
+    - assets/caldinho.png
+    - assets/Group40.png
+    - assets/QRcodebutton.png
+    - assets/qr_code_2.png
+    - assets/circle.png
+    - assets/ler_qr.png
+    - assets/voltar.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
