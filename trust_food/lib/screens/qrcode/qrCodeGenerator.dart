@@ -4,72 +4,69 @@ class QRCodeGenerator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white, // Ensures pure white background
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white, // Makes the app bar match the background
-        elevation: 0, // Removes shadow for a cleaner look
-        iconTheme: IconThemeData(color: Colors.black), // Adjusts back button color if needed
+        backgroundColor: Colors.white,
+        elevation: 0,
+        iconTheme: IconThemeData(color: Colors.black),
         leading: IconButton(
           icon: Image.asset(
-            'assets/left_arrow.png', // Path to your left arrow image
-            height: 24, // Adjust the height as needed
-            width: 24, // Adjust the width as needed
+            'assets/left_arrow.png',
+            height: 24,
+            width: 24,
           ),
           onPressed: () {
-            // Define what happens when the icon is pressed
-            Navigator.pop(context); // Example: Go back to the previous screen
+            Navigator.pop(context);
           },
         ),
       ),
       body: Column(
         children: [
           Align(
-            alignment: Alignment.topCenter, // Centers horizontally at the top
+            alignment: Alignment.topCenter,
             child: Padding(
-              padding: const EdgeInsets.only(top: 32.0), // Adjusts distance from the top
+              padding: const EdgeInsets.only(top: 32.0),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center, // Centers content horizontally
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     "Coco do Seu Gustavo",
                     style: TextStyle(
-                      fontFamily: 'Roboto', // Fonte padrão do Flutter
+                      fontFamily: 'Roboto',
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFF123859), // Text color (customize as needed)
+                      color: Color(0xFF123859),
                     ),
                   ),
-                  SizedBox(width: 8), // Adds space between the text and image
+                  SizedBox(width: 8),
                   Image.asset(
-                    'assets/green_check.png', // Path to your image asset
-                    height: 24, // Adjust the height as needed
-                    width: 24, // Adjust the width as needed
+                    'assets/green_check.png',
+                    height: 24,
+                    width: 24,
                   ),
                 ],
               ),
             ),
           ),
-          // Move this text slightly to the left
           Padding(
-            padding: const EdgeInsets.only(top: 20.0, right: 10.0), // Adjust left padding here
+            padding: const EdgeInsets.only(top: 20.0, right: 10.0),
             child: Text(
               "Basta apontar a câmera\n para o QR Code abaixo",
               style: TextStyle(
-                fontFamily: 'Roboto', // Fonte padrão do Flutter
+                fontFamily: 'Roboto',
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFF0F5FA6), // Cor personalizada para o texto
+                color: Color(0xFF0F5FA6),
               ),
             ),
           ),
-          // Move the QR code image higher
           Padding(
-            padding: const EdgeInsets.only(top: 100.0), // Adjust top padding to move image higher
+            padding: const EdgeInsets.only(top: 100.0),
             child: Center(
               child: Image.asset(
-                'assets/qr_code_2.png', // Path to your QR code image
-                height: 200, // Adjust the height as needed
-                width: 500, // Adjust the width as needed
+                'assets/qr_code_2.png',
+                height: 200,
+                width: 500,
               ),
             ),
           ),
