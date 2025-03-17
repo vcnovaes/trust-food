@@ -61,6 +61,16 @@ flutter:
   assets:
     - lib/assets/image.png
     - assets/image.png
+    - assets/ambulante.png
+    - assets/circle.png
+    - assets/green_check.png
+    - assets/image.png
+    - assets/left_arrow.png
+    - assets/ler_qr.png
+    - assets/map_home_user.png
+    - assets/qr_code_1.png
+    - assets/qr_code_2.png
+    - assets/voltar.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
