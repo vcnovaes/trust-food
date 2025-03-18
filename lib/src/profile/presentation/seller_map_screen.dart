@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:trust_food/src/home/presentation/seller_home.dart';
 
 class SellerMapScreen extends StatefulWidget {
   static String route() => '/seller/map';
@@ -30,7 +32,7 @@ class SellerMapState extends State<SellerMapScreen> {
             top: 40,
             left: 16,
             child: GestureDetector(
-              onTap: () => Navigator.pop(context),
+              onTap: () => context.go(SellerHomePage.route()),
               child: Image.asset(
                 'assets/left_arrow.png',
                 width: 32,

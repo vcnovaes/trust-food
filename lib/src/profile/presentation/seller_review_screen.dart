@@ -3,47 +3,45 @@ import 'package:flutter/material.dart';
 class SellerReviewsScreen extends StatelessWidget {
   static String route() => '/seller/reviews';
 
-  SellerReviewsScreen({super.key});
-
-  final double rating = 4.0;
-  final int totalReviews = 233;
-  final List<Map<String, dynamic>> reviews = [
-    {
-      'name': 'Maria Luiza',
-      'comment':
-          'Muito bom! Tudo higienizado, e também muito gostoso! Recomendo.',
-      'stars': 5,
-    },
-    {
-      'name': 'Lázaro',
-      'comment': 'Eu gostei muito, mas tinha mosca por perto.',
-      'stars': 4,
-    },
-    {
-      'name': 'Joana',
-      'comment':
-          'Pra mim foi perfeito, fazia tempo que não comia, foi muito bom.',
-      'stars': 5,
-    },
-    {
-      'name': 'Pedro',
-      'comment': 'Foi bom, mas no dia estava com muito inseto.',
-      'stars': 3,
-    },
-    {
-      'name': 'Carlos',
-      'comment': 'Muito inseto, moscas, desisti e não comprei.',
-      'stars': 2,
-    },
-  ];
+  const SellerReviewsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final double rating = 4.0;
+    final int totalReviews = 233;
+    final List<Map<String, dynamic>> reviews = [
+      {
+        'name': 'Maria Luiza',
+        'comment':
+            'Muito bom! Tudo higienizado, e também muito gostoso! Recomendo.',
+        'stars': 5,
+      },
+      {
+        'name': 'Lázaro',
+        'comment': 'Eu gostei muito, mas tinha mosca por perto.',
+        'stars': 4,
+      },
+      {
+        'name': 'Joana',
+        'comment':
+            'Pra mim foi perfeito, fazia tempo que não comia, foi muito bom.',
+        'stars': 5,
+      },
+      {
+        'name': 'Pedro',
+        'comment': 'Foi bom, mas no dia estava com muito inseto.',
+        'stars': 3,
+      },
+      {
+        'name': 'Carlos',
+        'comment': 'Muito inseto, moscas, desisti e não comprei.',
+        'stars': 2,
+      },
+    ];
+
     return Scaffold(
-      appBar: AppBar(
-        leading: const BackButton(),
-        actions: [IconButton(icon: const Icon(Icons.menu), onPressed: () {})],
-      ),
+      appBar: AppBar(automaticallyImplyLeading: false),
+
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(

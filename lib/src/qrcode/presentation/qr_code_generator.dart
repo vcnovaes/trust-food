@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:trust_food/src/home/presentation/seller_home.dart';
 
 class QRCodeGeneratorScreen extends StatelessWidget {
   static String route() => '/qrcode/generator';
@@ -16,7 +18,7 @@ class QRCodeGeneratorScreen extends StatelessWidget {
         leading: IconButton(
           icon: Image.asset('assets/left_arrow.png', height: 24, width: 24),
           onPressed: () {
-            Navigator.pop(context);
+            context.go(SellerHomePage.route());
           },
         ),
       ),

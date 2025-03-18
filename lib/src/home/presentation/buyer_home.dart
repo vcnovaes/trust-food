@@ -50,18 +50,6 @@ class BuyerHomePageState extends State<BuyerHomePage> {
           Positioned.fill(
             child: Image.asset('assets/map_home_user.png', fit: BoxFit.cover),
           ),
-          Positioned(
-            top: 40,
-            left: 16,
-            child: GestureDetector(
-              onTap: () => Navigator.pop(context),
-              child: Image.asset(
-                'assets/left_arrow.png',
-                width: 32,
-                height: 32,
-              ),
-            ),
-          ),
         ],
       ),
       bottomNavigationBar: Container(
