@@ -4,6 +4,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:go_router/go_router.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:trust_food/src/qrcode/presentation/qr_code_scanner.dart';
+// import 'package:trust_food/utils/firestore_test_service.dart'; // Import da função Teste
 
 class BuyerHomePage extends StatefulWidget {
   static String route() => '/buyer_home';
@@ -16,6 +17,14 @@ class BuyerHomePage extends StatefulWidget {
 
 class BuyerHomePageState extends State<BuyerHomePage> {
   final MapController _mapController = MapController();
+
+  // // TESTE - conexão com Firebase
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   // Chama a função para carregar todos os ambulantes do Firebase quando a página for carregada
+  //   getAllVendors();
+  // }
 
   @override
   void initState() {
