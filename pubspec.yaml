@@ -55,6 +55,10 @@ dependencies:
   cloud_firestore: ^5.6.5
   firebase_storage: ^12.4.4
 
+  flutter_map: ^8.1.1
+  latlong2: ^0.9.1   
+  geolocator: ^10.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -103,6 +107,8 @@ flutter:
     - assets/circle.png
     - assets/ler_qr.png
     - assets/voltar.png
+    - assets/ler_QR_Code_Button.png
+    - assets/retangulo.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
