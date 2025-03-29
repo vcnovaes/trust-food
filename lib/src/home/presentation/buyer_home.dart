@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:trust_food/src/home/domain/models/user_model.dart';
 import 'package:trust_food/src/qrcode/presentation/qr_code_scanner.dart';
+// import 'package:trust_food/utils/firestore_test_service.dart'; // Import da função Teste
 
 class UserProfileDrawer extends StatelessWidget {
   final String username;
@@ -126,6 +127,17 @@ class BuyerHomePageState extends State<BuyerHomePage> {
       userType: "Consumidor",
     ),
   ];
+
+  List<UserModel> get recommendedUsers =>
+      users.where((user) => user.userType == "Comerciante").toList();
+
+  // // TESTE - conexão com Firebase
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   // Chama a função para carregar todos os ambulantes do Firebase quando a página for carregada
+  //   getAllVendors();
+  // }
 
   void _toggleAmbulantes() {
     setState(() {
