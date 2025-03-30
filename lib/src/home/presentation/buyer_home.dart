@@ -4,7 +4,8 @@ import 'package:latlong2/latlong.dart';
 import 'package:go_router/go_router.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:trust_food/src/qrcode/presentation/qr_code_scanner.dart';
-// import 'package:trust_food/utils/firestore_test_service.dart'; // Import da função Teste
+import 'package:trust_food/src/gallery/presentation/gallery.dart';
+import 'package:trust_food/src/mock-data/mock_data.dart';
 
 class BuyerHomePage extends StatefulWidget {
   static String route() => '/buyer_home';
@@ -17,14 +18,7 @@ class BuyerHomePage extends StatefulWidget {
 
 class BuyerHomePageState extends State<BuyerHomePage> {
   final MapController _mapController = MapController();
-
-  // // TESTE - conexão com Firebase
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   // Chama a função para carregar todos os ambulantes do Firebase quando a página for carregada
-  //   getAllVendors();
-  // }
+  LatLng? _currentPosition;
 
   @override
   void initState() {
@@ -44,7 +38,10 @@ class BuyerHomePageState extends State<BuyerHomePage> {
     if (permission == LocationPermission.deniedForever) return;
 
     Position position = await Geolocator.getCurrentPosition();
-    _mapController.move(LatLng(position.latitude, position.longitude), 30);
+    setState(() {
+      _currentPosition = LatLng(position.latitude, position.longitude);
+      _mapController.move(_currentPosition!, 30);
+    });
   }
 
   @override
@@ -60,6 +57,31 @@ class BuyerHomePageState extends State<BuyerHomePage> {
                 urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                 userAgentPackageName: 'com.example.app',
               ),
+              if (_currentPosition != null)
+                MarkerLayer(
+                  markers: mockSellers.asMap().entries.map((entry) {
+                    final index = entry.key;
+                    final seller = entry.value;
+                    return Marker(
+                      width: 50,
+                      height: 50,
+                      point: LatLng(
+                        _currentPosition!.latitude + (index * 0.001),
+                        _currentPosition!.longitude + (index * 0.001),
+                      ),
+                      child: GestureDetector(
+                        onTap: () {
+                          context.go(GalleryScreen.route(seller.id));
+                        },
+                        child: Image.asset(
+                          'assets/seller_point_map.png',
+                          width: 40,
+                          height: 40,
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                ),
             ],
           ),
           Positioned(
@@ -68,7 +90,7 @@ class BuyerHomePageState extends State<BuyerHomePage> {
             right: 0,
             child: Container(
               height: 200,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('assets/retangulo.png'),
                   fit: BoxFit.cover,

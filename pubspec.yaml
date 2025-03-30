@@ -99,7 +99,6 @@ flutter:
     - assets/star.png
     - assets/qr_code_1.png
     - assets/ambulante.png
-    - assets/coco_praia.png
     - assets/caldinho.png
     - assets/Group40.png
     - assets/QRcodebutton.png
@@ -109,6 +108,14 @@ flutter:
     - assets/voltar.png
     - assets/ler_QR_Code_Button.png
     - assets/retangulo.png
+    - assets/seller_point_map.png
+    - assets/profile_button.png
+    - assets/coco_do_seu_gustavo_home.png
+    - assets/coco_do_seu_gustavo_gallery_1.png
+    - assets/coco_do_seu_gustavo_gallery_2.png
+    - assets/milho_do_ze_home.png
+    - assets/milho_do_ze_gallery_1.png
+    - assets/milho_do_ze_gallery_2.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
