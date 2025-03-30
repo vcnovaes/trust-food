@@ -9,8 +9,11 @@ class QrCodeRoutes {
       builder: (context, _) => const QRCodeScannerScreen(),
     ),
     GoRoute(
-      path: QRCodeGeneratorScreen.route(),
-      builder: (context, _) => const QRCodeGeneratorScreen(),
+      path: QRCodeGeneratorScreen.route(':sellerId'), 
+      builder: (context, state) {
+        final sellerId = state.pathParameters['sellerId']!;
+        return QRCodeGeneratorScreen(sellerId: sellerId); 
+      },
     ),
   ];
 }

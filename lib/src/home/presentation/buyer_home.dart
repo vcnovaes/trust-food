@@ -4,13 +4,23 @@ import 'package:latlong2/latlong.dart';
 import 'package:go_router/go_router.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:trust_food/src/qrcode/presentation/qr_code_scanner.dart';
-import 'package:trust_food/src/gallery/presentation/gallery.dart';
 import 'package:trust_food/src/mock-data/mock_data.dart';
+import 'package:trust_food/src/home/presentation/seller_home.dart';
+// import 'package:trust_food/utils/firestore_test_service.dart'; // Import da função Teste
 
 class BuyerHomePage extends StatefulWidget {
   static String route() => '/buyer_home';
 
   const BuyerHomePage({super.key});
+
+  // // TESTE - conexão com Firebase
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   // Chama a função para carregar todos os ambulantes do Firebase quando a página for carregada
+  //   getAllVendors();
+  // }
+ 
 
   @override
   BuyerHomePageState createState() => BuyerHomePageState();
@@ -71,7 +81,7 @@ class BuyerHomePageState extends State<BuyerHomePage> {
                       ),
                       child: GestureDetector(
                         onTap: () {
-                          context.go(GalleryScreen.route(seller.id));
+                          context.go(SellerHomePage.route(seller.id));
                         },
                         child: Image.asset(
                           'assets/seller_point_map.png',

@@ -123,7 +123,7 @@ class LoginScreenState extends ConsumerState<LoginScreen> {
     state.loginRequestStatus.maybeMap(
       orElse: () {
         if (_email == "seller@email.com") {
-          context.go(SellerHomePage.route());
+          context.go(BuyerHomePage.route());
         } else {
           context.go(BuyerHomePage.route());
         }

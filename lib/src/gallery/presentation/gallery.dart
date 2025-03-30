@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 import 'package:trust_food/src/mock-data/mock_data.dart';
 import 'package:go_router/go_router.dart';
-import 'package:trust_food/src/home/presentation/buyer_home.dart';
-// import 'package:trust_food/utils/firestore_test_service.dart'; // Import da função Teste
+import 'package:trust_food/src/home/presentation/seller_home.dart';
 
 class GalleryScreen extends StatelessWidget {
   static String route(String sellerId) => '/gallery/products/$sellerId';
@@ -10,14 +9,6 @@ class GalleryScreen extends StatelessWidget {
   final String sellerId;
 
   const GalleryScreen({super.key, required this.sellerId});
-
-  // // TESTE - conexão com Firebase
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   // Chama a função para carregar todos os ambulantes do Firebase quando a página for carregada
-  //   getAllVendors();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +23,7 @@ class GalleryScreen extends StatelessWidget {
         leading: IconButton(
           icon: Image.asset('assets/left_arrow.png', height: 24, width: 24),
           onPressed: () {
-            context.go(BuyerHomePage.route());
+            context.go(SellerHomePage.route(sellerId));
           },
         ),
         actions: [
