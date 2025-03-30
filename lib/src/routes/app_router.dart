@@ -6,6 +6,7 @@ import 'package:trust_food/src/qrcode/routes/qr_code_routes.dart';
 import 'package:trust_food/src/signup/routes/sign_up_routes.dart';
 import 'package:trust_food/src/splash/presentation/splash_screeen.dart';
 import 'package:trust_food/src/splash/routes/splash_routes.dart';
+import 'package:trust_food/src/gallery/routes/gallery_routes.dart';
 
 final router = GoRouter(
   initialLocation: SplashScreen.route(),
@@ -16,5 +17,6 @@ final router = GoRouter(
     ...QrCodeRoutes.routes,
     ...SignUpRoutes.routes,
     ...SplashRoutes.routes,
+    ...GalleryRoutes.routes,
   ],
 );
