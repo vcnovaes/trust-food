@@ -58,7 +58,7 @@ class SplashScreenState extends ConsumerState<SplashScreen> {
     if (_isAuthSuccess) {
       userType.map(
         seller: (_) {
-          context.go(SellerHomePage.route());
+          context.go(BuyerHomePage.route());
         },
         buyer: (_) {
           context.go(BuyerHomePage.route());

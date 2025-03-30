@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:trust_food/src/profile/presentation/seller_map_screen.dart';
 import 'package:trust_food/src/qrcode/presentation/qr_code_generator.dart';
+import 'package:trust_food/src/mock-data/mock_data.dart';
+import 'package:trust_food/src/gallery/presentation/gallery.dart';
 
-class SellerHomePage extends StatefulWidget {
-  static String route() => '/seller_home';
+class SellerHomePage extends StatelessWidget {
+  static String route(String sellerId) => '/seller_home/$sellerId';
 
-  const SellerHomePage({super.key});
+  final String sellerId;
 
-  @override
-  SellerHomePageState createState() => SellerHomePageState();
-}
+  const SellerHomePage({super.key, required this.sellerId});
 
-enum SellerPage { dashboard, orders, profile }
-
-class SellerHomePageState extends State<SellerHomePage> {
   @override
   Widget build(BuildContext context) {
+    final seller = mockSellers.firstWhere((s) => s.id == sellerId);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -26,74 +24,92 @@ class SellerHomePageState extends State<SellerHomePage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            ImageSection(image: 'assets/coco_praia.png', wid: 600, hei: 240),
-            TitleSection(
-              name: 'Coco do Seu Gustavo',
-              location: 'Praia de Boa Viagem',
+            Padding(
+              padding: const EdgeInsets.only(right: 16.0),
+              child: Align(
+                alignment: Alignment.topRight,
+                child: Image.asset('assets/profile_button.png', height: 45, width: 45),
+              ),
+            ),
+            SizedBox(height: 16),
+
+            Image.asset(seller.homeImage, width: 600, height: 240, fit: BoxFit.cover),
+            Padding(
+              padding: const EdgeInsets.only(left: 32.0, top: 32.0),
+              child: Row(
+                children: [
+                  Text(
+                    seller.businessName,
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF123859),
+                    ),
+                  ),
+                  SizedBox(width: 8),
+                  Image.asset('assets/green_check.png', height: 24, width: 24),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 32), 
+              child: Row(
+                children: [
+                  Text(
+                    'Aberto', 
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF123859),
+                    ),
+                  ),
+                  SizedBox(width: 5),
+                  Image.asset('assets/toggle_on.png', height: 35, width: 35), 
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 32, top: 8), 
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.star,
+                    color: Color(0xFFF2C305),
+                  ),
+                  SizedBox(width: 4), 
+                  Text(
+                    '${seller.rating}',
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF123859),
+                    ),
+                  ),
+                ],
+              ),
             ),
             TextSection(
-              description:
-                  'Se você está em busca de uma bebida natural, refrescante e cheia de benefícios para a sua saúde, a água de coco é a escolha perfeita! Além de deliciosa, ela é uma excelente fonte de hidratação e nutrição, ideal para qualquer momento do dia. '
-                  'A água de coco é rica em eletrólitos essenciais, como potássio, magnésio e sódio, que ajudam a manter seu corpo hidratado e cheio de energia. Perfeita para quem pratica esportes, trabalha sob o sol ou simplesmente deseja uma alternativa saudável às bebidas industrializadas. Além disso, é uma ótima opção para ajudar na digestão, melhorar a circulação e fortalecer o sistema imunológico. ',
+              description: seller.description,
             ),
+            SizedBox(height: 16),
             GestureDetector(
               onTap: () {
-                context.go(SellerMapScreen.route());
+                context.go(GalleryScreen.route(sellerId));
               },
-              child: ImageSection(
-                image: 'assets/Group40.png',
-                wid: 350,
-                hei: 50,
-              ),
+              child: Image.asset('assets/gallery.png', width: 350, height: 50),
             ),
-            SizedBox(height: 30),
+            SizedBox(height: 16),
             GestureDetector(
               onTap: () {
-                context.go(QRCodeGeneratorScreen.route());
+                context.go(QRCodeGeneratorScreen.route(sellerId)); 
               },
-              child: ImageSection(
-                image: 'assets/QRcodebutton.png',
-                wid: 350,
-                hei: 50,
-              ),
+              child: Image.asset('assets/QRcodebutton.png', width: 350, height: 50),
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class TitleSection extends StatelessWidget {
-  const TitleSection({super.key, required this.name, required this.location});
-
-  final String name;
-  final String location;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(32),
-      child: Row(
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 8),
-                  child: Text(
-                    name,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ),
-                Text(location, style: TextStyle(color: Colors.grey[500])),
-              ],
-            ),
-          ),
-          Icon(Icons.star, color: Color(0xFFF2C305)),
-          const Text('41'),
-        ],
       ),
     );
   }
@@ -110,23 +126,5 @@ class TextSection extends StatelessWidget {
       padding: const EdgeInsets.all(32),
       child: Text(description, softWrap: true),
     );
-  }
-}
-
-class ImageSection extends StatelessWidget {
-  const ImageSection({
-    super.key,
-    required this.image,
-    required this.wid,
-    required this.hei,
-  });
-
-  final String image;
-  final double wid;
-  final double hei;
-
-  @override
-  Widget build(BuildContext context) {
-    return Image.asset(image, width: wid, height: hei, fit: BoxFit.cover);
   }
 }
