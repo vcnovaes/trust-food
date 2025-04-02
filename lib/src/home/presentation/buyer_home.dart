@@ -5,14 +5,14 @@ import 'package:go_router/go_router.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:trust_food/src/qrcode/presentation/qr_code_scanner.dart';
 import 'package:trust_food/src/mock-data/mock_data.dart';
-import 'package:trust_food/src/home/presentation/seller_home.dart';
+import 'package:trust_food/src/buyer-to-seller/presentation/home_buyer_to_seller.dart';
+import 'package:trust_food/src/selection/presentation/select_user.dart'; 
 // import 'package:trust_food/utils/firestore_test_service.dart'; // Import da função Teste
 
 class BuyerHomePage extends StatefulWidget {
   static String route() => '/buyer_home';
 
   const BuyerHomePage({super.key});
-
   // // TESTE - conexão com Firebase
   // @override
   // void initState() {
@@ -20,7 +20,6 @@ class BuyerHomePage extends StatefulWidget {
   //   // Chama a função para carregar todos os ambulantes do Firebase quando a página for carregada
   //   getAllVendors();
   // }
- 
 
   @override
   BuyerHomePageState createState() => BuyerHomePageState();
@@ -81,7 +80,7 @@ class BuyerHomePageState extends State<BuyerHomePage> {
                       ),
                       child: GestureDetector(
                         onTap: () {
-                          context.go(SellerHomePage.route(seller.id));
+                          context.go('/home-buyer-to-seller/${seller.id}'); 
                         },
                         child: Image.asset(
                           'assets/seller_point_map.png',
@@ -93,6 +92,20 @@ class BuyerHomePageState extends State<BuyerHomePage> {
                   }).toList(),
                 ),
             ],
+          ),
+          Positioned(
+            top: 20,
+            left: 20,
+            child: GestureDetector(
+              onTap: () {
+                context.go(SelectUser.route()); 
+              },
+              child: Image.asset(
+                'assets/log_out_button.png',
+                width: 50,
+                height: 60, 
+              ),
+            ),
           ),
           Positioned(
             bottom: 0,

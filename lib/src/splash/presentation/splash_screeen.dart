@@ -42,7 +42,7 @@ class SplashScreenState extends ConsumerState<SplashScreen> {
   void _splashListener(BuildContext context, SplashState state) {
     state.authRequestStatus.maybeWhen(
       orElse: () => {},
-      failed: (_) => context.go(LoginScreen.route()),
+      failed: (_) => context.go('/selectuser'),
       succeeded: (_) {
         _isAuthSuccess = true;
         _checkNavigation(context, state.userType);

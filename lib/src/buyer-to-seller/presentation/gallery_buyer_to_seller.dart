@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:trust_food/src/mock-data/mock_data.dart';
 import 'package:go_router/go_router.dart';
-import 'package:trust_food/src/home/presentation/seller_home.dart';
+import 'package:trust_food/src/buyer-to-seller/presentation/home_buyer_to_seller.dart';
 
-class GalleryScreen extends StatelessWidget {
+class GalleryBuyerToSeller extends StatelessWidget {
   static String route(String sellerId) => '/gallery/products/$sellerId';
 
   final String sellerId;
 
-  const GalleryScreen({super.key, required this.sellerId});
+  const GalleryBuyerToSeller({super.key, required this.sellerId});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class GalleryScreen extends StatelessWidget {
         leading: IconButton(
           icon: Image.asset('assets/left_arrow.png', height: 45, width: 45),
           onPressed: () {
-            context.go(SellerHomePage.route(sellerId));
+            context.go('/home-buyer-to-seller/${seller.id}');
           },
         ),
       ),

@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:trust_food/src/qrcode/presentation/qr_code_generator.dart';
 import 'package:trust_food/src/mock-data/mock_data.dart';
-import 'package:trust_food/src/gallery/presentation/gallery.dart';
-import 'package:trust_food/src/selection/presentation/select_user.dart';
+import 'package:trust_food/src/buyer-to-seller/presentation/gallery_buyer_to_seller.dart';
 
-class SellerHomePage extends StatelessWidget {
-  static String route(String sellerId) => '/seller_home/$sellerId';
+class BuyerToSellerHomePage extends StatelessWidget {
+  static String route(String sellerId) => '/home-buyer-to-seller/$sellerId';
 
   final String sellerId;
 
-  const SellerHomePage({super.key, required this.sellerId});
+  const BuyerToSellerHomePage({super.key, required this.sellerId});
 
   @override
   Widget build(BuildContext context) {
@@ -23,23 +22,23 @@ class SellerHomePage extends StatelessWidget {
         automaticallyImplyLeading: false,
         leading: GestureDetector(
           onTap: () {
-            context.go(SelectUser.route());
+            context.go('/buyer_home');
           },
           child: Padding(
             padding: const EdgeInsets.only(left: 16.0),
-            child: Image.asset('assets/log_out_button.png', height: 55, width: 55),
+            child: Image.asset('assets/left_arrow.png', height: 45, width: 45),
           ),
         ),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Image.asset(
               seller.homeImage,
               width: MediaQuery.of(context).size.width,
               height: 240,
-              fit: BoxFit.cover, 
+              fit: BoxFit.cover,
             ),
             Padding(
               padding: const EdgeInsets.only(left: 32.0, top: 32.0),
@@ -47,14 +46,14 @@ class SellerHomePage extends StatelessWidget {
                 children: [
                   Text(
                     seller.businessName,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontFamily: 'Roboto',
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Color(0xFF123859),
                     ),
                   ),
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   Image.asset('assets/green_check.png', height: 24, width: 24),
                 ],
               ),
@@ -63,7 +62,7 @@ class SellerHomePage extends StatelessWidget {
               padding: const EdgeInsets.only(left: 32),
               child: Row(
                 children: [
-                  Text(
+                  const Text(
                     'Aberto',
                     style: TextStyle(
                       fontFamily: 'Roboto',
@@ -72,7 +71,7 @@ class SellerHomePage extends StatelessWidget {
                       color: Color(0xFF123859),
                     ),
                   ),
-                  SizedBox(width: 5),
+                  const SizedBox(width: 5),
                   Image.asset('assets/toggle_on.png', height: 35, width: 35),
                 ],
               ),
@@ -81,14 +80,14 @@ class SellerHomePage extends StatelessWidget {
               padding: const EdgeInsets.only(left: 32, top: 8),
               child: Row(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.star,
                     color: Color(0xFFF2C305),
                   ),
-                  SizedBox(width: 4),
+                  const SizedBox(width: 4),
                   Text(
                     '${seller.rating}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontFamily: 'Roboto',
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -98,48 +97,36 @@ class SellerHomePage extends StatelessWidget {
                 ],
               ),
             ),
-            TextSection(
-              description: seller.description,
+            const SizedBox(height: 16),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32),
+              child: Text(
+                seller.description,
+                style: const TextStyle(
+                  fontFamily: 'Roboto',
+                  fontSize: 16,
+                  color: Color(0xFF123859),
+                ),
+                softWrap: true,
+              ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 32),
             GestureDetector(
               onTap: () {
-                context.go(GalleryScreen.route(sellerId));
+                context.go('/gallery-buyer-to-seller/$sellerId');
               },
               child: Image.asset('assets/gallery.png', width: 350, height: 50),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             GestureDetector(
               onTap: () {
-                context.go(QRCodeGeneratorScreen.route(sellerId));
+                context.go('/qrcode-generator-buyer-to-seller/$sellerId');
               },
               child: Image.asset('assets/QRcodebutton.png', width: 350, height: 50),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class TextSection extends StatelessWidget {
-  const TextSection({super.key, required this.description});
-
-  final String description;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 32), 
-      child: Text(
-        description,
-        style: TextStyle(
-          fontFamily: 'Roboto',
-          fontSize: 16,
-          color: Color(0xFF123859),
-        ),
-        softWrap: true,
       ),
     );
   }
