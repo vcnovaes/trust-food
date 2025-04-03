@@ -38,13 +38,13 @@ class Seller extends User {
     required this.galleryImage2,
     required this.description,
   }) : super(
-          id: id,
-          firstName: firstName,
-          lastName: lastName,
-          email: email,
-          phone: phone,
-          userType: userType,
-        );
+         id: id,
+         firstName: firstName,
+         lastName: lastName,
+         email: email,
+         phone: phone,
+         userType: userType,
+       );
 }
 
 List<Seller> mockSellers = [
@@ -60,7 +60,8 @@ List<Seller> mockSellers = [
     homeImage: 'assets/pastel_do_seu_gustavo_home.png',
     galleryImage1: 'assets/pastel_do_seu_gustavo_gallery_1.png',
     galleryImage2: 'assets/pastel_do_seu_gustavo_gallery_2.png',
-    description: 'Aqui no Pastel do Seu Gustavo, você vai saborear os pastéis mais crocantes e recheados da cidade!',
+    description:
+        'Aqui no Pastel do Seu Gustavo, você vai saborear os pastéis mais crocantes e recheados da cidade!',
   ),
   Seller(
     id: '2',
@@ -74,7 +75,8 @@ List<Seller> mockSellers = [
     homeImage: 'assets/milho_do_ze_home.png',
     galleryImage1: 'assets/milho_do_ze_gallery_1.png',
     galleryImage2: 'assets/milho_do_ze_gallery_2.png',
-    description: 'Aqui é o Zé! Meu milho é sempre fresquinho, cozido na hora. Venha provar o melhor milho da cidade!',
+    description:
+        'Aqui é o Zé! Meu milho é sempre fresquinho, cozido na hora. Venha provar o melhor milho da cidade!',
   ),
 ];
 
