@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:trust_food/src/home/presentation/buyer_home.dart';
 
 class QRCodeScannerScreen extends StatelessWidget {
   static String route() => '/qrcode/scanner';
+
   const QRCodeScannerScreen({super.key});
 
   @override
@@ -11,12 +13,35 @@ class QRCodeScannerScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          Positioned.fill(
-            child: SizedBox(
-              width: double.infinity,
-              height: double.infinity,
-              child: Image.asset('assets/ler_qr.png', fit: BoxFit.fill),
+          Align(
+            alignment: Alignment.topCenter,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 32.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Aponte a câmera para o QR Code",
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF123859),
+                    ),
+                  ),
+                  SizedBox(width: 8),
+                  Image.asset('assets/green_check.png', height: 24, width: 24),
+                ],
+              ),
             ),
+          ),
+          MobileScanner(
+            onDetect: (capture) {
+              final List<Barcode> barcodes = capture.barcodes;
+              for (final barcode in barcodes) {
+                context.go('${barcode.rawValue}');
+              }
+            },
           ),
           Positioned(
             top: 40,
