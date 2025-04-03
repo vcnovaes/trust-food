@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:trust_food/src/mock-data/mock_data.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import 'package:trust_food/src/home/presentation/seller_home.dart';
+import 'package:trust_food/src/mock-data/mock_data.dart';
 
 class QRCodeGeneratorScreen extends StatelessWidget {
-  final String sellerId; 
+  final String sellerId;
 
   const QRCodeGeneratorScreen({super.key, required this.sellerId});
 
-  static String route(String sellerId) => '/qrcode/generator/$sellerId'; 
+  static String route(String sellerId) => '/qrcode/generator/$sellerId';
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class QRCodeGeneratorScreen extends StatelessWidget {
         leading: IconButton(
           icon: Image.asset('assets/left_arrow.png', height: 45, width: 45),
           onPressed: () {
-            context.go(SellerHomePage.route(sellerId)); 
+            context.go(SellerHomePage.route(sellerId));
           },
         ),
       ),
@@ -37,7 +38,7 @@ class QRCodeGeneratorScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    seller.businessName, 
+                    seller.businessName,
                     style: TextStyle(
                       fontFamily: 'Roboto',
                       fontSize: 20,
@@ -65,11 +66,11 @@ class QRCodeGeneratorScreen extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.only(top: 100.0),
-            child: Center(
-              child: Image.asset(
-                'assets/qr_code_2.png',
-                height: 200,
-                width: 500,
+            child: QrImageView(
+              data: seller.qrCodeLink,
+              size: 230,
+              embeddedImageStyle: const QrEmbeddedImageStyle(
+                size: Size(500, 200),
               ),
             ),
           ),

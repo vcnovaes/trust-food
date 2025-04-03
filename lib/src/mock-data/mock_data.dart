@@ -23,6 +23,7 @@ class Seller extends User {
   final String galleryImage1;
   final String galleryImage2;
   final String description;
+  final String qrCodeLink;
 
   Seller({
     required String id,
@@ -37,14 +38,15 @@ class Seller extends User {
     required this.galleryImage1,
     required this.galleryImage2,
     required this.description,
+    required this.qrCodeLink,
   }) : super(
-          id: id,
-          firstName: firstName,
-          lastName: lastName,
-          email: email,
-          phone: phone,
-          userType: userType,
-        );
+         id: id,
+         firstName: firstName,
+         lastName: lastName,
+         email: email,
+         phone: phone,
+         userType: userType,
+       );
 }
 
 List<Seller> mockSellers = [
@@ -60,7 +62,10 @@ List<Seller> mockSellers = [
     homeImage: 'assets/pastel_do_seu_gustavo_home.png',
     galleryImage1: 'assets/pastel_do_seu_gustavo_gallery_1.png',
     galleryImage2: 'assets/pastel_do_seu_gustavo_gallery_2.png',
-    description: 'Aqui no Pastel do Seu Gustavo, você vai saborear os pastéis mais crocantes e recheados da cidade!',
+    description:
+        'Aqui no Pastel do Seu Gustavo, você vai saborear os pastéis mais crocantes e recheados da cidade!',
+    qrCodeLink:
+        'https://scontent-atl3-2.cdninstagram.com/o1/v/t2/f2/m86/AQMDeg2y3b0p4ucKzErysIdgT6gE2HJoOvXJ4GrIQdzU9Hh6pSXXoX0bKKYZ1HFf-aJb_Mw5ufRhqkQwdbfIakCq9y2srjWeJc98NBA.mp4?_nc_cat=104&_nc_sid=5e9851&_nc_ht=scontent-atl3-2.cdninstagram.com&_nc_ohc=Aaf5IKfb-coQ7kNvgFHjYqZ&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5JTlNUQUdSQU0uQ0xJUFMuQzMuNzIwLmRhc2hfYmFzZWxpbmVfMV92MSIsInhwdl9hc3NldF9pZCI6MTE5NjQxNjE0NTMyODY2MSwidmlfdXNlY2FzZV9pZCI6MTAwOTksImR1cmF0aW9uX3MiOjU5LCJ1cmxnZW5fc291cmNlIjoid3d3In0%3D&ccb=17-1&vs=ec111ff12515765d&_nc_vs=HBksFQIYUmlnX3hwdl9yZWVsc19wZXJtYW5lbnRfc3JfcHJvZC82NDRCRUI4RUM3MEFCMDk1NzVCMjNBNEZFNkUwNzI5NF92aWRlb19kYXNoaW5pdC5tcDQVAALIAQAVAhg6cGFzc3Rocm91Z2hfZXZlcnN0b3JlL0dPMXlFeDB2UzFqTEJBNEVBQ1JaVjJBVWJUWXpicV9FQUFBRhUCAsgBACgAGAAbAogHdXNlX29pbAExEnByb2dyZXNzaXZlX3JlY2lwZQExFQAAJqqoxPXKiKAEFQIoAkMzLBdATdItDlYEGRgSZGFzaF9iYXNlbGluZV8xX3YxEQB1_gcA&_nc_zt=28&oh=00_AYFIFGrMXFrgR9H1JP0NmwAlBjDyrr05sTR4LJo9qZzeEw&oe=67F07269',
   ),
   Seller(
     id: '2',
@@ -74,7 +79,9 @@ List<Seller> mockSellers = [
     homeImage: 'assets/milho_do_ze_home.png',
     galleryImage1: 'assets/milho_do_ze_gallery_1.png',
     galleryImage2: 'assets/milho_do_ze_gallery_2.png',
-    description: 'Aqui é o Zé! Meu milho é sempre fresquinho, cozido na hora. Venha provar o melhor milho da cidade!',
+    description:
+        'Aqui é o Zé! Meu milho é sempre fresquinho, cozido na hora. Venha provar o melhor milho da cidade!',
+    qrCodeLink: 'https://example.com/qrcode_milho',
   ),
 ];
 
