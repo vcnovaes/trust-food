@@ -13,28 +13,7 @@ class QRCodeScannerScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          Align(
-            alignment: Alignment.topCenter,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 32.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Aponte a câmera para o QR Code",
-                    style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF123859),
-                    ),
-                  ),
-                  SizedBox(width: 8),
-                  Image.asset('assets/green_check.png', height: 24, width: 24),
-                ],
-              ),
-            ),
-          ),
+          // Camera Scanner
           MobileScanner(
             onDetect: (capture) {
               final List<Barcode> barcodes = capture.barcodes;
@@ -43,6 +22,37 @@ class QRCodeScannerScreen extends StatelessWidget {
               }
             },
           ),
+
+          Container(
+            color: Colors.black.withValues(alpha: (0.5 * 255).toDouble()),
+          ),
+
+          Positioned(
+            top: 180,
+            left: 0,
+            right: 0,
+            child: Text(
+              "Aponte a câmera para o código",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+          ),
+
+          Center(
+            child: Container(
+              width: 250,
+              height: 250,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.white, width: 3),
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+          ),
+
           Positioned(
             top: 40,
             left: 16,
