@@ -74,7 +74,7 @@ class BuyerHomePageState extends State<BuyerHomePage> {
                           ),
                           child: GestureDetector(
                             onTap: () {
-                              context.go(SellerHomePage.route(seller.id));
+                              context.go('/home-buyer-to-seller/${seller.id}');
                             },
                             child: Image.asset(
                               'assets/seller_point_map.png',

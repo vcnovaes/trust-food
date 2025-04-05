@@ -8,6 +8,7 @@ import 'package:trust_food/src/selection/routes/select_user_routes.dart';
 import 'package:trust_food/src/signup/routes/sign_up_routes.dart';
 import 'package:trust_food/src/splash/presentation/splash_screeen.dart';
 import 'package:trust_food/src/splash/routes/splash_routes.dart';
+import 'package:trust_food/src/buyer-to-seller/routes/home_buyer_to_seller_routes.dart';
 
 final router = GoRouter(
   initialLocation: SplashScreen.route(),
@@ -20,5 +21,6 @@ final router = GoRouter(
     ...SplashRoutes.routes,
     ...GalleryRoutes.routes,
     ...SelectUserRoutes.routes,
+    ...BuyerToSellerHomeRoutes.routes,
   ],
 );
