@@ -5,9 +5,13 @@ import 'package:trust_food/src/home/presentation/seller_home.dart';
 class HomeRoutes {
   static final routes = [
     GoRoute(
-      path: BuyerHomePage.route(),
-      builder: (context, _) => const BuyerHomePage(),
+      path: '/buyer_home/:userId',
+      builder: (context, state) {
+        final userId = state.pathParameters['userId']!;
+        return BuyerHomePage(userId: userId);
+      },
     ),
+
     GoRoute(
       path: '/seller_home/:sellerId',
       builder: (context, state) {
