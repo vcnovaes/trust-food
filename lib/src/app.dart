@@ -26,7 +26,7 @@ class TrustFoodApp extends ConsumerWidget {
     );
 
     return MaterialApp.router(
-      title: 'AmaranteFlutter',
+      title: 'TrustFood',
       theme: themeData,
       routerConfig: ref.watch(appRouterProvider),
       builder:

@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:trust_food/src/home/presentation/seller_home.dart';
 import 'package:trust_food/src/mock-data/mock_data.dart';
+import 'package:web/web.dart' as web;
 
 class QRCodeGeneratorScreen extends StatelessWidget {
   final String sellerId;
@@ -10,6 +11,10 @@ class QRCodeGeneratorScreen extends StatelessWidget {
   const QRCodeGeneratorScreen({super.key, required this.sellerId});
 
   static String route(String sellerId) => '/qrcode/generator/$sellerId';
+
+  String getBaseUrl() {
+    return web.window.location.origin;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +72,7 @@ class QRCodeGeneratorScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 100.0),
             child: QrImageView(
-              data: seller.qrCodeLink,
+              data: getBaseUrl() + SellerHomePage.route(seller.id),
               size: 230,
               embeddedImageStyle: const QrEmbeddedImageStyle(
                 size: Size(500, 200),
