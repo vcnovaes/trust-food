@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:trust_food/src/mock-data/mock_data.dart'; 
+import 'package:trust_food/src/mock-data/mock_data.dart';
 import 'package:trust_food/src/home/presentation/seller_home.dart';
-import 'package:trust_food/src/home/presentation/buyer_home.dart'; 
+import 'package:trust_food/src/home/presentation/buyer_home.dart';
 
 class SelectUser extends StatefulWidget {
   const SelectUser({super.key});
@@ -34,10 +34,12 @@ class SelectUserState extends State<SelectUser> {
               ),
               Expanded(
                 child: ListView.builder(
-                  itemCount: mockSellers.length + mockUsers.length, 
+                  itemCount: mockSellers.length + mockUsers.length,
                   itemBuilder: (BuildContext context, int index) {
                     final isSeller = index < mockSellers.length;
-                    final user = isSeller ? mockSellers[index] : mockUsers[index - mockSellers.length];
+                    final user = isSeller
+                        ? mockSellers[index]
+                        : mockUsers[index - mockSellers.length];
 
                     return userItem(
                       user.email,
@@ -71,7 +73,7 @@ class SelectUserState extends State<SelectUser> {
         child: const Icon(Icons.person_outline_outlined, color: Colors.white),
       ),
       title: Text(
-        "$firstName $lastName", 
+        "$firstName $lastName",
         style: const TextStyle(
           fontFamily: 'Roboto',
           color: Color.fromRGBO(15, 95, 166, 1),
@@ -100,9 +102,9 @@ class SelectUserState extends State<SelectUser> {
       ),
       onTap: () {
         if (userType == 'Vendedor') {
-          context.go(SellerHomePage.route(userId)); 
+          context.go('/seller_home/$userId');
         } else {
-          context.go(BuyerHomePage.route()); 
+          context.go('/buyer_home');
         }
       },
     );

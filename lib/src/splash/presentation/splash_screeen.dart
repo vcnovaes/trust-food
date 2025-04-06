@@ -54,14 +54,14 @@ class SplashScreenState extends ConsumerState<SplashScreen> {
 
   void _checkNavigation(BuildContext context, UserType userType) {
     if (_isAuthSuccess) {
-      userType.map(
-        seller: (_) {
-          context.go(BuyerHomePage.route());
-        },
-        buyer: (_) {
-          context.go(BuyerHomePage.route());
-        },
-      );
+      // userType.map(
+      //   seller: (_) {
+      //     context.go(BuyerHomePage.route());
+      //   },
+      //   buyer: (_) {
+      //     context.go('/buyer_home/$userId');
+      //   },
+      // );
     }
   }
 }

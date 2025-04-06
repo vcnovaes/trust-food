@@ -6,13 +6,15 @@ class QrCodeRoutes {
   static final routes = [
     GoRoute(
       path: QRCodeScannerScreen.route(),
-      builder: (context, _) => const QRCodeScannerScreen(),
+      builder: (context, state) {
+        return const QRCodeScannerScreen();
+      },
     ),
     GoRoute(
-      path: QRCodeGeneratorScreen.route(':sellerId'), 
+      path: QRCodeGeneratorScreen.route(':sellerId'),
       builder: (context, state) {
         final sellerId = state.pathParameters['sellerId']!;
-        return QRCodeGeneratorScreen(sellerId: sellerId); 
+        return QRCodeGeneratorScreen(sellerId: sellerId);
       },
     ),
   ];

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:trust_food/src/profile/presentation/seller_profile_screen.dart';
 import 'package:trust_food/src/qrcode/presentation/qr_code_generator.dart';
 import 'package:trust_food/src/mock-data/mock_data.dart';
 import 'package:trust_food/src/gallery/presentation/gallery.dart';
@@ -10,13 +11,13 @@ class SellerHomePage extends StatefulWidget {
 
   final String sellerId;
   const SellerHomePage({super.key, required this.sellerId});
-  
+
   SellerHomePageState createState() => SellerHomePageState();
-  
 }
 
-class SellerHomePageState extends State<SellerHomePage>{
-  
+class SellerHomePageState extends State<SellerHomePage> {
+  Color brandBlue = Color(0xFF0F5FA6);
+
   @override
   Widget build(BuildContext context) {
     String sellerId = widget.sellerId;
@@ -43,15 +44,17 @@ class SellerHomePageState extends State<SellerHomePage>{
           Builder(
             builder:
                 (context) => IconButton(
-                  icon: Icon(
-                    Icons.menu,
-                    color: Color(0xFF123859),
+                  icon: Image.asset(
+                    'assets/profile_button.png',
+                    height: 55,
+                    width: 55,
                   ), // Hamburger icon
                   onPressed: () {
                     Scaffold.of(context).openEndDrawer(); // Open the end drawer
                   },
                 ),
           ),
+          const Divider(color: Color(0xFFD9D9D9)),
         ],
       ),
       endDrawer: Drawer(
@@ -65,7 +68,7 @@ class SellerHomePageState extends State<SellerHomePage>{
                 children: [
                   CircleAvatar(
                     radius: 30,
-                    backgroundColor: Colors.blueAccent,
+                    backgroundColor: brandBlue,
                     child: Icon(Icons.person, color: Colors.white, size: 40),
                   ),
                   SizedBox(width: 16),
@@ -76,23 +79,25 @@ class SellerHomePageState extends State<SellerHomePage>{
                         Text(
                           seller.businessName,
                           style: TextStyle(
-                            color: Colors.black45,
+                            color: Color(0xFF123859),
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         GestureDetector(
                           onTap: () {
-                            context.go('/seller_profile/${seller.id}');
-                            // TODO: Add navigation to account details if needed
+                            context.push(SellerProfileScreen.route(sellerId));
                           },
-
                           child: Text(
                             'Detalhes da conta',
                             style: TextStyle(
-                              color: Colors.lightBlueAccent,
+                              color: Color(0xFF0F5FA6),
                               fontSize: 16,
+                              fontWeight: FontWeight.bold,
                               decoration: TextDecoration.underline,
+                              decorationColor: Color(0xFF0F5FA6),
+                              decorationThickness:
+                                  2, // Adds padding to the underlining
                             ),
                           ),
                         ),
@@ -106,12 +111,15 @@ class SellerHomePageState extends State<SellerHomePage>{
               child: Container(),
             ), // This pushes the logout to the bottom
             Padding(
-              padding: const EdgeInsets.only(right: 16.0, bottom: 16),
+              padding: const EdgeInsets.only(
+                right: 16.0,
+                bottom: 40,
+              ), // Adjusted bottom padding to move it higher
               child: Align(
                 alignment: Alignment.bottomRight,
                 child: GestureDetector(
                   onTap: () {
-                    context.go(SelectUser.route());
+                    context.push(SelectUser.route());
                   },
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -169,29 +177,30 @@ class SellerHomePageState extends State<SellerHomePage>{
                   Row(
                     children: [
                       Text(
-                      'Aberto',
-                      style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF123859),
+                        'Aberto',
+                        style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF123859),
+                        ),
                       ),
-                    ),
-                    SizedBox(width: 5),
-                    Switch(
-                      value: seller.open,
-                      activeColor: Colors.green,
-                      onChanged: (bool value) {
-                        setState((){
-                          seller.open = value;
-                          mockSellers.firstWhere((s) => s.id == sellerId).open = seller.open;
-                        });
-                      },
-                    )
-
-                    ]
+                      SizedBox(width: 5),
+                      Switch(
+                        value: seller.open,
+                        activeColor: Colors.green,
+                        onChanged: (bool value) {
+                          setState(() {
+                            seller.open = value;
+                            mockSellers
+                                .firstWhere((s) => s.id == sellerId)
+                                .open = seller.open;
+                          });
+                        },
+                      ),
+                    ],
                   ),
-                   Row(
+                  Row(
                     children: [
                       SizedBox(width: 10),
                       Text(
@@ -208,17 +217,16 @@ class SellerHomePageState extends State<SellerHomePage>{
                         value: seller.canMove,
                         activeColor: Colors.green,
                         onChanged: (bool value) {
-                          setState((){
+                          setState(() {
                             seller.canMove = value;
-                            mockSellers.firstWhere((s) => s.id == sellerId).canMove = seller.canMove;
+                            mockSellers
+                                .firstWhere((s) => s.id == sellerId)
+                                .canMove = seller.canMove;
                           });
                         },
-                      )
-
-                    ]
+                      ),
+                    ],
                   ),
-
-                  
                 ],
               ),
             ),
@@ -244,14 +252,14 @@ class SellerHomePageState extends State<SellerHomePage>{
             SizedBox(height: 16),
             GestureDetector(
               onTap: () {
-                context.go(GalleryScreen.route(sellerId));
+                context.push(GalleryScreen.route(sellerId));
               },
               child: Image.asset('assets/gallery.png', width: 350, height: 50),
             ),
             SizedBox(height: 16),
             GestureDetector(
               onTap: () {
-                context.go(QRCodeGeneratorScreen.route(sellerId));
+                context.push(QRCodeGeneratorScreen.route(sellerId));
               },
               child: Image.asset(
                 'assets/QRcodebutton.png',
@@ -266,6 +274,7 @@ class SellerHomePageState extends State<SellerHomePage>{
     );
   }
 }
+
 class TextSection extends StatelessWidget {
   const TextSection({super.key, required this.description});
 
