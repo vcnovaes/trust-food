@@ -1,104 +1,271 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:trust_food/src/profile/presentation/seller_map_screen.dart';
 import 'package:trust_food/src/qrcode/presentation/qr_code_generator.dart';
+import 'package:trust_food/src/mock-data/mock_data.dart';
+import 'package:trust_food/src/gallery/presentation/gallery.dart';
+import 'package:trust_food/src/selection/presentation/select_user.dart';
 
 class SellerHomePage extends StatefulWidget {
-  static String route() => '/seller_home';
+  static String route(String sellerId) => '/seller_home/$sellerId';
 
-  const SellerHomePage({super.key});
-
-  @override
+  final String sellerId;
+  const SellerHomePage({super.key, required this.sellerId});
+  
   SellerHomePageState createState() => SellerHomePageState();
+  
 }
 
-enum SellerPage { dashboard, orders, profile }
-
-class SellerHomePageState extends State<SellerHomePage> {
+class SellerHomePageState extends State<SellerHomePage>{
+  
   @override
   Widget build(BuildContext context) {
+    String sellerId = widget.sellerId;
+    var seller = mockSellers.firstWhere((s) => s.id == sellerId);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
+        leading: GestureDetector(
+          onTap: () {
+            context.go(SelectUser.route());
+          },
+          child: Padding(
+            padding: const EdgeInsets.only(left: 16.0),
+            child: Image.asset(
+              'assets/log_out_button.png',
+              height: 55,
+              width: 55,
+            ),
+          ),
+        ),
+        actions: [
+          Builder(
+            builder:
+                (context) => IconButton(
+                  icon: Icon(
+                    Icons.menu,
+                    color: Color(0xFF123859),
+                  ), // Hamburger icon
+                  onPressed: () {
+                    Scaffold.of(context).openEndDrawer(); // Open the end drawer
+                  },
+                ),
+          ),
+        ],
+      ),
+      endDrawer: Drawer(
+        child: Column(
+          children: [
+            Container(
+              color: Color.fromARGB(255, 255, 255, 255),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 65),
+              width: double.infinity,
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    radius: 30,
+                    backgroundColor: Colors.blueAccent,
+                    child: Icon(Icons.person, color: Colors.white, size: 40),
+                  ),
+                  SizedBox(width: 16),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          seller.businessName,
+                          style: TextStyle(
+                            color: Colors.black45,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            context.go('/seller_profile/${seller.id}');
+                            // TODO: Add navigation to account details if needed
+                          },
+
+                          child: Text(
+                            'Detalhes da conta',
+                            style: TextStyle(
+                              color: Colors.lightBlueAccent,
+                              fontSize: 16,
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Container(),
+            ), // This pushes the logout to the bottom
+            Padding(
+              padding: const EdgeInsets.only(right: 16.0, bottom: 16),
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: GestureDetector(
+                  onTap: () {
+                    context.go(SelectUser.route());
+                  },
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        'Sair',
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(width: 4),
+                      Icon(Icons.logout, color: Colors.red),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            ImageSection(image: 'assets/coco_praia.png', wid: 600, hei: 240),
-            TitleSection(
-              name: 'Coco do Seu Gustavo',
-              location: 'Praia de Boa Viagem',
+            SizedBox(height: 16),
+            Image.asset(
+              seller.homeImage,
+              width: MediaQuery.of(context).size.width,
+              height: 240,
+              fit: BoxFit.cover,
             ),
-            TextSection(
-              description:
-                  'Se você está em busca de uma bebida natural, refrescante e cheia de benefícios para a sua saúde, a água de coco é a escolha perfeita! Além de deliciosa, ela é uma excelente fonte de hidratação e nutrição, ideal para qualquer momento do dia. '
-                  'A água de coco é rica em eletrólitos essenciais, como potássio, magnésio e sódio, que ajudam a manter seu corpo hidratado e cheio de energia. Perfeita para quem pratica esportes, trabalha sob o sol ou simplesmente deseja uma alternativa saudável às bebidas industrializadas. Além disso, é uma ótima opção para ajudar na digestão, melhorar a circulação e fortalecer o sistema imunológico. ',
-            ),
-            GestureDetector(
-              onTap: () {
-                context.go(SellerMapScreen.route());
-              },
-              child: ImageSection(
-                image: 'assets/Group40.png',
-                wid: 350,
-                hei: 50,
+            Padding(
+              padding: const EdgeInsets.only(left: 32.0, top: 32.0),
+              child: Row(
+                children: [
+                  Text(
+                    seller.businessName,
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF123859),
+                    ),
+                  ),
+                  SizedBox(width: 8),
+                  Image.asset('assets/green_check.png', height: 24, width: 24),
+                ],
               ),
             ),
-            SizedBox(height: 30),
-            GestureDetector(
-              onTap: () {
-                context.go(QRCodeGeneratorScreen.route());
-              },
-              child: ImageSection(
-                image: 'assets/QRcodebutton.png',
-                wid: 350,
-                hei: 50,
+            Padding(
+              padding: const EdgeInsets.only(left: 32),
+              child: Row(
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                      'Aberto',
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF123859),
+                      ),
+                    ),
+                    SizedBox(width: 5),
+                    Switch(
+                      value: seller.open,
+                      activeColor: Colors.green,
+                      onChanged: (bool value) {
+                        setState((){
+                          seller.open = value;
+                          mockSellers.firstWhere((s) => s.id == sellerId).open = seller.open;
+                        });
+                      },
+                    )
+
+                    ]
+                  ),
+                   Row(
+                    children: [
+                      SizedBox(width: 10),
+                      Text(
+                        'Pode Mover-se',
+                        style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF123859),
+                        ),
+                      ),
+                      SizedBox(width: 5),
+                      Switch(
+                        value: seller.canMove,
+                        activeColor: Colors.green,
+                        onChanged: (bool value) {
+                          setState((){
+                            seller.canMove = value;
+                            mockSellers.firstWhere((s) => s.id == sellerId).canMove = seller.canMove;
+                          });
+                        },
+                      )
+
+                    ]
+                  ),
+
+                  
+                ],
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.only(left: 32, top: 8),
+              child: Row(
+                children: [
+                  Icon(Icons.star, color: Color(0xFFF2C305)),
+                  SizedBox(width: 4),
+                  Text(
+                    '${seller.rating}',
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF123859),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            TextSection(description: seller.description),
+            SizedBox(height: 16),
+            GestureDetector(
+              onTap: () {
+                context.go(GalleryScreen.route(sellerId));
+              },
+              child: Image.asset('assets/gallery.png', width: 350, height: 50),
+            ),
+            SizedBox(height: 16),
+            GestureDetector(
+              onTap: () {
+                context.go(QRCodeGeneratorScreen.route(sellerId));
+              },
+              child: Image.asset(
+                'assets/QRcodebutton.png',
+                width: 350,
+                height: 50,
+              ),
+            ),
+            SizedBox(height: 16),
           ],
         ),
       ),
     );
   }
 }
-
-class TitleSection extends StatelessWidget {
-  const TitleSection({super.key, required this.name, required this.location});
-
-  final String name;
-  final String location;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(32),
-      child: Row(
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 8),
-                  child: Text(
-                    name,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ),
-                Text(location, style: TextStyle(color: Colors.grey[500])),
-              ],
-            ),
-          ),
-          Icon(Icons.star, color: Color(0xFFF2C305)),
-          const Text('41'),
-        ],
-      ),
-    );
-  }
-}
-
 class TextSection extends StatelessWidget {
   const TextSection({super.key, required this.description});
 
@@ -107,26 +274,16 @@ class TextSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(32),
-      child: Text(description, softWrap: true),
+      padding: const EdgeInsets.symmetric(horizontal: 32),
+      child: Text(
+        description,
+        style: TextStyle(
+          fontFamily: 'Roboto',
+          fontSize: 16,
+          color: Color(0xFF123859),
+        ),
+        softWrap: true,
+      ),
     );
-  }
-}
-
-class ImageSection extends StatelessWidget {
-  const ImageSection({
-    super.key,
-    required this.image,
-    required this.wid,
-    required this.hei,
-  });
-
-  final String image;
-  final double wid;
-  final double hei;
-
-  @override
-  Widget build(BuildContext context) {
-    return Image.asset(image, width: wid, height: hei, fit: BoxFit.cover);
   }
 }

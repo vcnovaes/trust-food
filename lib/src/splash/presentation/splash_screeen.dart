@@ -3,8 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:trust_food/src/home/presentation/buyer_home.dart';
-import 'package:trust_food/src/home/presentation/seller_home.dart';
-import 'package:trust_food/src/login/presentation/login_screen.dart';
 import 'package:trust_food/src/shared/design/tokens/default_color_tokens.dart';
 import 'package:trust_food/src/shared/domain/types/user_type.dart';
 import 'package:trust_food/src/splash/domain/usecase/splash_usecase.dart';
@@ -42,7 +40,7 @@ class SplashScreenState extends ConsumerState<SplashScreen> {
   void _splashListener(BuildContext context, SplashState state) {
     state.authRequestStatus.maybeWhen(
       orElse: () => {},
-      failed: (_) => context.go(LoginScreen.route()),
+      failed: (_) => context.go('/selectuser'),
       succeeded: (_) {
         _isAuthSuccess = true;
         _checkNavigation(context, state.userType);
@@ -58,7 +56,7 @@ class SplashScreenState extends ConsumerState<SplashScreen> {
     if (_isAuthSuccess) {
       userType.map(
         seller: (_) {
-          context.go(SellerHomePage.route());
+          context.go(BuyerHomePage.route());
         },
         buyer: (_) {
           context.go(BuyerHomePage.route());

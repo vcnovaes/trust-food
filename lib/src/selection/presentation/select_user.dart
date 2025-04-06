@@ -1,34 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:trust_food/src/home/domain/models/user_model.dart';
-import 'package:trust_food/src/home/presentation/buyer_home.dart';
+import 'package:trust_food/src/mock-data/mock_data.dart'; 
 import 'package:trust_food/src/home/presentation/seller_home.dart';
+import 'package:trust_food/src/home/presentation/buyer_home.dart'; 
 
-class Selectuser extends StatefulWidget {
-  const Selectuser({super.key});
+class SelectUser extends StatefulWidget {
+  const SelectUser({super.key});
+
+  static String route() => '/selectuser';
 
   @override
   SelectUserState createState() => SelectUserState();
 }
 
-class SelectUserState extends State<Selectuser> {
-  List<UserModel> users = [
-    UserModel(
-      email: "gustavo.lins10@gmail.com",
-      phone: "99996666",
-      firstName: "Gustavo",
-      lastName: "Lins",
-      userType: "Comerciante",
-    ),
-    UserModel(
-      email: "albertob@gmail.com",
-      phone: "99996666",
-      firstName: "Alberto",
-      lastName: "Bomfim",
-      userType: "Consumidor",
-    ),
-  ];
-
+class SelectUserState extends State<SelectUser> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,8 +23,8 @@ class SelectUserState extends State<Selectuser> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset('assets/trustfoodlogo.png'),
-              Text(
-                'Selecione o usuário',
+              const Text(
+                'Selecione o Usuário',
                 style: TextStyle(
                   fontFamily: 'Roboto',
                   color: Color(0xFF123859),
@@ -49,15 +34,18 @@ class SelectUserState extends State<Selectuser> {
               ),
               Expanded(
                 child: ListView.builder(
-                  itemCount: users.length,
+                  itemCount: mockSellers.length + mockUsers.length, 
                   itemBuilder: (BuildContext context, int index) {
+                    final isSeller = index < mockSellers.length;
+                    final user = isSeller ? mockSellers[index] : mockUsers[index - mockSellers.length];
+
                     return userItem(
-                      users[index].email,
-                      users[index].phone,
-                      users[index].firstName,
-                      users[index].lastName,
-                      users[index].userType,
-                      index,
+                      user.email,
+                      user.phone,
+                      user.firstName,
+                      user.lastName,
+                      user.userType,
+                      user.id,
                     );
                   },
                 ),
@@ -75,16 +63,16 @@ class SelectUserState extends State<Selectuser> {
     String firstName,
     String lastName,
     String userType,
-    int index,
+    String userId,
   ) {
     return ListTile(
       leading: CircleAvatar(
         backgroundColor: const Color.fromRGBO(15, 95, 166, 1),
-        child: Icon(Icons.person_outline_outlined, color: Colors.white),
+        child: const Icon(Icons.person_outline_outlined, color: Colors.white),
       ),
       title: Text(
-        "$firstName$lastName",
-        style: TextStyle(
+        "$firstName $lastName", 
+        style: const TextStyle(
           fontFamily: 'Roboto',
           color: Color.fromRGBO(15, 95, 166, 1),
           fontWeight: FontWeight.w500,
@@ -92,29 +80,29 @@ class SelectUserState extends State<Selectuser> {
       ),
       subtitle: Text(
         email,
-        style: TextStyle(fontFamily: 'Roboto', color: Color(0xFF123859)),
+        style: const TextStyle(fontFamily: 'Roboto', color: Color(0xFF123859)),
       ),
       trailing: Container(
         height: 20,
         width: 90,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: Color(0xFF94C213),
+          color: const Color(0xFF94C213),
         ),
         alignment: Alignment.centerLeft,
         child: Center(
           child: Text(
             textAlign: TextAlign.center,
             userType,
-            style: TextStyle(fontFamily: 'Roboto', color: Colors.white),
+            style: const TextStyle(fontFamily: 'Roboto', color: Colors.white),
           ),
         ),
       ),
       onTap: () {
-        if (users[index].userType == "Consumidor") {
-          context.go(BuyerHomePage.route());
-        } else if (users[index].userType == "Comerciante") {
-          context.go(SellerHomePage.route());
+        if (userType == 'Vendedor') {
+          context.go(SellerHomePage.route(userId)); 
+        } else {
+          context.go(BuyerHomePage.route()); 
         }
       },
     );

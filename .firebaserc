@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "trust-food-698a0"
+  },
+  "targets": {
+    "trust-food-698a0": {
+      "hosting": {
+        "trustfood": [
+          "trustfood"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

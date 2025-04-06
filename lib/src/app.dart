@@ -2,11 +2,11 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:trust_food/src/login/presentation/login_screen.dart';
 import 'package:trust_food/src/routes/app_router_providers.dart';
 import 'package:trust_food/src/shared/data/miscelaneous/envs.dart';
 import 'package:trust_food/src/shared/domain/models/api_state_model.dart';
 import 'package:trust_food/src/shared/shared_providers.dart';
+import 'package:go_router/go_router.dart';
 
 class TrustFoodApp extends ConsumerWidget {
   const TrustFoodApp({super.key});
@@ -14,13 +14,19 @@ class TrustFoodApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.listen(SharedProviders.apiRepositoryProvider, (previous, next) {
-      _apiStateListener(ref: ref, next: next, previous: previous);
+      _apiStateListener(
+        ref: ref,
+        next: next,
+        previous: previous,
+        context: context,
+      );
     });
     final ThemeData themeData = ref.watch<ThemeData>(
       SharedProviders.themeNotifierProvider,
     );
+
     return MaterialApp.router(
-      title: 'AmaranteFlutter',
+      title: 'TrustFood',
       theme: themeData,
       routerConfig: ref.watch(appRouterProvider),
       builder:
@@ -54,11 +60,12 @@ class TrustFoodApp extends ConsumerWidget {
     required WidgetRef ref,
     required ApiState next,
     ApiState? previous,
+    required BuildContext context,
   }) {
     next.maybeWhen(
       orElse: () {},
       signedOut: () {
-        ref.read(appRouterProvider).go(LoginScreen.route());
+        context.go('/selectuser');
       },
     );
   }
