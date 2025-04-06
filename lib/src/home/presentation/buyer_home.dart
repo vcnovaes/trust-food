@@ -3,7 +3,6 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:trust_food/src/home/presentation/seller_home.dart';
 import 'package:trust_food/src/mock-data/mock_data.dart';
 import 'package:trust_food/src/qrcode/presentation/qr_code_scanner.dart';
 import 'package:trust_food/src/selection/presentation/select_user.dart';

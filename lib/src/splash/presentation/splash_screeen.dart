@@ -3,8 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:trust_food/src/home/presentation/buyer_home.dart';
-import 'package:trust_food/src/home/presentation/seller_home.dart';
-import 'package:trust_food/src/login/presentation/login_screen.dart';
 import 'package:trust_food/src/shared/design/tokens/default_color_tokens.dart';
 import 'package:trust_food/src/shared/domain/types/user_type.dart';
 import 'package:trust_food/src/splash/domain/usecase/splash_usecase.dart';

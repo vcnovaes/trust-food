@@ -23,28 +23,23 @@ class Seller extends User {
   final String galleryImage1;
   final String galleryImage2;
   final String description;
+  final String qrCodeLink;
 
   Seller({
-    required String id,
-    required String firstName,
-    required String lastName,
-    required String email,
-    required String phone,
-    required String userType,
+    required super.id,
+    required super.firstName,
+    required super.lastName,
+    required super.email,
+    required super.phone,
+    required super.userType,
     required this.businessName,
     required this.rating,
     required this.homeImage,
     required this.galleryImage1,
     required this.galleryImage2,
     required this.description,
-  }) : super(
-         id: id,
-         firstName: firstName,
-         lastName: lastName,
-         email: email,
-         phone: phone,
-         userType: userType,
-       );
+    required this.qrCodeLink,
+  });
 }
 
 List<Seller> mockSellers = [
@@ -62,6 +57,7 @@ List<Seller> mockSellers = [
     galleryImage2: 'assets/pastel_do_seu_gustavo_gallery_2.png',
     description:
         'Aqui no Pastel do Seu Gustavo, você vai saborear os pastéis mais crocantes e recheados da cidade!',
+    qrCodeLink: '',
   ),
   Seller(
     id: '2',
@@ -77,6 +73,7 @@ List<Seller> mockSellers = [
     galleryImage2: 'assets/milho_do_ze_gallery_2.png',
     description:
         'Aqui é o Zé! Meu milho é sempre fresquinho, cozido na hora. Venha provar o melhor milho da cidade!',
+    qrCodeLink: '',
   ),
 ];
 

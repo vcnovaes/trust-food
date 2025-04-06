@@ -1,5 +1,4 @@
 import 'package:go_router/go_router.dart';
-import 'package:flutter/material.dart';
 import 'package:trust_food/src/gallery/presentation/gallery.dart';
 
 class GalleryRoutes {

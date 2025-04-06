@@ -1,1 +1,37 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"trust-food-698a0","appId":"1:175264350484:android:22cf1f5148236449a6c201","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"trust-food-698a0","configurations":{"android":"1:175264350484:android:22cf1f5148236449a6c201","ios":"1:175264350484:ios:b67e8c6eaae7a8daa6c201","macos":"1:175264350484:ios:b67e8c6eaae7a8daa6c201","web":"1:175264350484:web:0d0012c05b2d4442a6c201","windows":"1:175264350484:web:f6e7d7c0678b660fa6c201"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "trust-food-698a0",
+          "appId": "1:175264350484:android:22cf1f5148236449a6c201",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "trust-food-698a0",
+          "configurations": {
+            "android": "1:175264350484:android:22cf1f5148236449a6c201",
+            "ios": "1:175264350484:ios:b67e8c6eaae7a8daa6c201",
+            "macos": "1:175264350484:ios:b67e8c6eaae7a8daa6c201",
+            "web": "1:175264350484:web:0d0012c05b2d4442a6c201",
+            "windows": "1:175264350484:web:f6e7d7c0678b660fa6c201"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "target": "trustfood",
+    "source": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "frameworksBackend": {
+      "region": "us-east1"
+    }
+  }
+}
