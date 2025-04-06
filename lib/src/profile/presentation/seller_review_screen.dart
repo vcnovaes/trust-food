@@ -1,45 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:trust_food/src/mock-data/mock_data.dart';
 
 class SellerReviewsScreen extends StatelessWidget {
   static String route(String sellerId) => '/reviews/$sellerId';
   String sellerId;
 
-  SellerReviewsScreen({super.key, required this.sellerId});
+  late Seller seller;
+  SellerReviewsScreen({super.key, required this.sellerId}) {
+    seller = mockSellers.firstWhere((s) => s.id == sellerId);
+  }
+
+  User getUserById(String id) {
+    return mockUsers.firstWhere((user) => user.id == id);
+  }
+
+  Seller getSellerById(String id) {
+    return mockSellers.firstWhere((seller) => seller.id == id);
+  }
 
   @override
   Widget build(BuildContext context) {
     final double rating = 4.0;
     final int totalReviews = 233;
-    final List<Map<String, dynamic>> reviews = [
-      {
-        'name': 'Maria Luiza',
-        'comment':
-            'Muito bom! Tudo higienizado, e também muito gostoso! Recomendo.',
-        'stars': 5,
-      },
-      {
-        'name': 'Lázaro',
-        'comment': 'Eu gostei muito, mas tinha mosca por perto.',
-        'stars': 4,
-      },
-      {
-        'name': 'Joana',
-        'comment':
-            'Pra mim foi perfeito, fazia tempo que não comia, foi muito bom.',
-        'stars': 5,
-      },
-      {
-        'name': 'Pedro',
-        'comment': 'Foi bom, mas no dia estava com muito inseto.',
-        'stars': 3,
-      },
-      {
-        'name': 'Carlos',
-        'comment': 'Muito inseto, moscas, desisti e não comprei.',
-        'stars': 2,
-      },
-    ];
-
+    final List<Review> reviews =
+        mockReviews.where((review) => review.sellerId == sellerId).toList();
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -68,7 +52,7 @@ class SellerReviewsScreen extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  "Rafael André",
+                  "${seller.firstName} ${seller.lastName}",
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -113,17 +97,17 @@ class SellerReviewsScreen extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                review['name'],
+                                getUserById(review.userId).firstName,
                                 style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                               const Spacer(),
-                              buildStars(review['stars'].toDouble()),
+                              buildStars(review.rating),
                             ],
                           ),
                           const SizedBox(height: 8),
-                          Text(review['comment']),
+                          Text(review.comment),
                         ],
                       ),
                     ),
