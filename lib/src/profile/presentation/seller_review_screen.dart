@@ -1,47 +1,58 @@
 import 'package:flutter/material.dart';
+import 'package:trust_food/src/mock-data/mock_data.dart';
 
 class SellerReviewsScreen extends StatelessWidget {
-  static String route() => '/seller/reviews';
+  static String route(String sellerId) => '/reviews/$sellerId';
+  String sellerId;
+  Color brandBlue = Color(0xFF0F5FA6);
 
-  const SellerReviewsScreen({super.key});
+  double getRating(List<Review> reviews) {
+    double totalRating = 0;
+    for (var review in reviews) {
+      totalRating += review.rating;
+    }
+    return totalRating / reviews.length;
+  }
+
+  late Seller seller;
+  SellerReviewsScreen({super.key, required this.sellerId}) {
+    seller = mockSellers.firstWhere((s) => s.id == sellerId);
+  }
+
+  User getUserById(String id) {
+    return mockUsers.firstWhere((user) => user.id == id);
+  }
+
+  Seller getSellerById(String id) {
+    return mockSellers.firstWhere((seller) => seller.id == id);
+  }
 
   @override
   Widget build(BuildContext context) {
-    final double rating = 4.0;
-    final int totalReviews = 233;
-    final List<Map<String, dynamic>> reviews = [
-      {
-        'name': 'Maria Luiza',
-        'comment':
-            'Muito bom! Tudo higienizado, e também muito gostoso! Recomendo.',
-        'stars': 5,
-      },
-      {
-        'name': 'Lázaro',
-        'comment': 'Eu gostei muito, mas tinha mosca por perto.',
-        'stars': 4,
-      },
-      {
-        'name': 'Joana',
-        'comment':
-            'Pra mim foi perfeito, fazia tempo que não comia, foi muito bom.',
-        'stars': 5,
-      },
-      {
-        'name': 'Pedro',
-        'comment': 'Foi bom, mas no dia estava com muito inseto.',
-        'stars': 3,
-      },
-      {
-        'name': 'Carlos',
-        'comment': 'Muito inseto, moscas, desisti e não comprei.',
-        'stars': 2,
-      },
-    ];
-
+    final List<Review> reviews =
+        mockReviews.where((review) => review.sellerId == sellerId).toList();
+    final int totalReviews = reviews.length;
+    final double rating = getRating(reviews);
     return Scaffold(
-      appBar: AppBar(automaticallyImplyLeading: false),
-
+      appBar: AppBar(
+        title: const Text(
+          'Avaliações recebidas',
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 20,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        centerTitle: true,
+        automaticallyImplyLeading: true,
+        backgroundColor: Colors.white,
+        leading: IconButton(
+          icon: Image.asset('assets/left_arrow.png', height: 45, width: 45),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -50,7 +61,7 @@ class SellerReviewsScreen extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  "Rafael André",
+                  "${seller.firstName} ${seller.lastName}",
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -95,17 +106,17 @@ class SellerReviewsScreen extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                review['name'],
+                                getUserById(review.userId).firstName,
                                 style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                               const Spacer(),
-                              buildStars(review['stars'].toDouble()),
+                              buildStars(review.rating),
                             ],
                           ),
                           const SizedBox(height: 8),
-                          Text(review['comment']),
+                          Text(review.comment),
                         ],
                       ),
                     ),
