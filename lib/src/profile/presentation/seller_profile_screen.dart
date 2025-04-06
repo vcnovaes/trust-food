@@ -80,7 +80,7 @@ class SellerProfileScreen extends StatelessWidget {
             label,
             style: const TextStyle(
               color: Colors.grey,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.bold,
             ),
           ),
           const SizedBox(width: 16),
