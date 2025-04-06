@@ -23,6 +23,10 @@ class Seller extends User {
   final String galleryImage1;
   final String galleryImage2;
   final String description;
+  bool canMove;
+  bool open;
+
+
 
   Seller({
     required String id,
@@ -31,6 +35,8 @@ class Seller extends User {
     required String email,
     required String phone,
     required String userType,
+    required this.canMove,
+    required this.open,
     required this.businessName,
     required this.rating,
     required this.homeImage,
@@ -55,6 +61,8 @@ List<Seller> mockSellers = [
     email: 'gustavo.lins10@gmail.com',
     phone: '99999-1111',
     userType: 'Vendedor',
+    canMove: false,
+    open: true,
     businessName: 'Pastel do Seu Gustavo',
     rating: 4,
     homeImage: 'assets/pastel_do_seu_gustavo_home.png',
@@ -70,6 +78,8 @@ List<Seller> mockSellers = [
     email: 'milhodoze@gmail.com',
     phone: '99999-2501',
     userType: 'Vendedor',
+    canMove: false,
+    open: true,
     businessName: 'Milho do Zé',
     rating: 5,
     homeImage: 'assets/milho_do_ze_home.png',
