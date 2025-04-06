@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
- import 'package:go_router/go_router.dart';
- import 'package:trust_food/src/qrcode/presentation/qr_code_generator.dart';
- import 'package:trust_food/src/mock-data/mock_data.dart';
- import 'package:trust_food/src/buyer-to-seller/presentation/gallery_buyer_to_seller.dart';
+import 'package:go_router/go_router.dart';
+import 'package:trust_food/src/qrcode/presentation/qr_code_generator.dart';
+import 'package:trust_food/src/mock-data/mock_data.dart';
+import 'package:trust_food/src/buyer-to-seller/presentation/gallery_buyer_to_seller.dart';
  
  class BuyerToSellerHomePage extends StatelessWidget {
    static String route(String sellerId) => '/home-buyer-to-seller/$sellerId';
@@ -61,19 +61,54 @@ import 'package:flutter/material.dart';
              Padding(
                padding: const EdgeInsets.only(left: 32),
                child: Row(
-                 children: [
-                   const Text(
-                     'Aberto',
-                     style: TextStyle(
-                       fontFamily: 'Roboto',
-                       fontSize: 16,
-                       fontWeight: FontWeight.bold,
-                       color: Color(0xFF123859),
-                     ),
-                   ),
-                   const SizedBox(width: 5),
-                   Image.asset('assets/toggle_on.png', height: 35, width: 35),
-                 ],
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                      'Aberto',
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF123859),
+                      ),
+                    ),
+                    SizedBox(width: 5),
+                    Switch(
+                      value: seller.open,
+                      activeColor: Colors.green,
+                      onChanged: (bool value) {
+                          seller.open = value;
+                      },
+                    )
+
+                    ]
+                  ),
+                   Row(
+                    children: [
+                      SizedBox(width: 10),
+                      Text(
+                        'Pode Mover-se',
+                        style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF123859),
+                        ),
+                      ),
+                      SizedBox(width: 5),
+                      Switch(
+                        value: seller.canMove,
+                        activeColor: Colors.green,
+                        onChanged: (bool value) {
+                            seller.canMove = value;
+
+                        },
+                      )
+
+                    ]
+                  ),
+                ],
                ),
              ),
              Padding(

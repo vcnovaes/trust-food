@@ -86,6 +86,7 @@ class SellerHomePageState extends State<SellerHomePage>{
                       onChanged: (bool value) {
                         setState((){
                           seller.open = value;
+                          mockSellers.firstWhere((s) => s.id == sellerId).open = seller.open;
                         });
                       },
                     )
@@ -111,6 +112,7 @@ class SellerHomePageState extends State<SellerHomePage>{
                         onChanged: (bool value) {
                           setState((){
                             seller.canMove = value;
+                            mockSellers.firstWhere((s) => s.id == sellerId).canMove = seller.canMove;
                           });
                         },
                       )
