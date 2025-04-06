@@ -4,6 +4,15 @@ import 'package:trust_food/src/mock-data/mock_data.dart';
 class SellerReviewsScreen extends StatelessWidget {
   static String route(String sellerId) => '/reviews/$sellerId';
   String sellerId;
+  Color brandBlue = Color(0xFF0F5FA6);
+
+  double getRating(List<Review> reviews) {
+    double totalRating = 0;
+    for (var review in reviews) {
+      totalRating += review.rating;
+    }
+    return totalRating / reviews.length;
+  }
 
   late Seller seller;
   SellerReviewsScreen({super.key, required this.sellerId}) {
@@ -20,10 +29,10 @@ class SellerReviewsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double rating = 4.0;
-    final int totalReviews = 233;
     final List<Review> reviews =
         mockReviews.where((review) => review.sellerId == sellerId).toList();
+    final int totalReviews = reviews.length;
+    final double rating = getRating(reviews);
     return Scaffold(
       appBar: AppBar(
         title: const Text(

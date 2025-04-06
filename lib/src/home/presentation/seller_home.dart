@@ -16,6 +16,8 @@ class SellerHomePage extends StatefulWidget {
 }
 
 class SellerHomePageState extends State<SellerHomePage> {
+  Color brandBlue = Color(0xFF0F5FA6);
+
   @override
   Widget build(BuildContext context) {
     String sellerId = widget.sellerId;
@@ -42,15 +44,17 @@ class SellerHomePageState extends State<SellerHomePage> {
           Builder(
             builder:
                 (context) => IconButton(
-                  icon: Icon(
-                    Icons.menu,
-                    color: Color(0xFF123859),
+                  icon: Image.asset(
+                    'assets/profile_button.png',
+                    height: 55,
+                    width: 55,
                   ), // Hamburger icon
                   onPressed: () {
                     Scaffold.of(context).openEndDrawer(); // Open the end drawer
                   },
                 ),
           ),
+          const Divider(color: Color(0xFFD9D9D9)),
         ],
       ),
       endDrawer: Drawer(
@@ -64,7 +68,7 @@ class SellerHomePageState extends State<SellerHomePage> {
                 children: [
                   CircleAvatar(
                     radius: 30,
-                    backgroundColor: Colors.blueAccent,
+                    backgroundColor: brandBlue,
                     child: Icon(Icons.person, color: Colors.white, size: 40),
                   ),
                   SizedBox(width: 16),
@@ -75,7 +79,7 @@ class SellerHomePageState extends State<SellerHomePage> {
                         Text(
                           seller.businessName,
                           style: TextStyle(
-                            color: Colors.black45,
+                            color: Color(0xFF123859),
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
@@ -84,13 +88,16 @@ class SellerHomePageState extends State<SellerHomePage> {
                           onTap: () {
                             context.push(SellerProfileScreen.route(sellerId));
                           },
-
                           child: Text(
                             'Detalhes da conta',
                             style: TextStyle(
-                              color: Colors.lightBlueAccent,
+                              color: Color(0xFF0F5FA6),
                               fontSize: 16,
+                              fontWeight: FontWeight.bold,
                               decoration: TextDecoration.underline,
+                              decorationColor: Color(0xFF0F5FA6),
+                              decorationThickness:
+                                  2, // Adds padding to the underlining
                             ),
                           ),
                         ),
@@ -104,7 +111,10 @@ class SellerHomePageState extends State<SellerHomePage> {
               child: Container(),
             ), // This pushes the logout to the bottom
             Padding(
-              padding: const EdgeInsets.only(right: 16.0, bottom: 16),
+              padding: const EdgeInsets.only(
+                right: 16.0,
+                bottom: 40,
+              ), // Adjusted bottom padding to move it higher
               child: Align(
                 alignment: Alignment.bottomRight,
                 child: GestureDetector(
