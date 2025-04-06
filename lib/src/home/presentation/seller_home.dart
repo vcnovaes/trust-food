@@ -20,15 +20,113 @@ class SellerHomePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
         leading: GestureDetector(
           onTap: () {
             context.go(SelectUser.route());
           },
           child: Padding(
             padding: const EdgeInsets.only(left: 16.0),
-            child: Image.asset('assets/log_out_button.png', height: 55, width: 55),
+            child: Image.asset(
+              'assets/log_out_button.png',
+              height: 55,
+              width: 55,
+            ),
           ),
+        ),
+        actions: [
+          Builder(
+            builder:
+                (context) => IconButton(
+                  icon: Icon(
+                    Icons.menu,
+                    color: Color(0xFF123859),
+                  ), // Hamburger icon
+                  onPressed: () {
+                    Scaffold.of(context).openEndDrawer(); // Open the end drawer
+                  },
+                ),
+          ),
+        ],
+      ),
+      endDrawer: Drawer(
+        child: Column(
+          children: [
+            Container(
+              color: Color.fromARGB(255, 255, 255, 255),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 65),
+              width: double.infinity,
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    radius: 30,
+                    backgroundColor: Colors.blueAccent,
+                    child: Icon(Icons.person, color: Colors.white, size: 40),
+                  ),
+                  SizedBox(width: 16),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          seller.businessName,
+                          style: TextStyle(
+                            color: Colors.black45,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            context.go('/seller_profile/${seller.id}');
+                            // TODO: Add navigation to account details if needed
+                          },
+
+                          child: Text(
+                            'Detalhes da conta',
+                            style: TextStyle(
+                              color: Colors.lightBlueAccent,
+                              fontSize: 16,
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Container(),
+            ), // This pushes the logout to the bottom
+            Padding(
+              padding: const EdgeInsets.only(right: 16.0, bottom: 16),
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: GestureDetector(
+                  onTap: () {
+                    context.go(SelectUser.route());
+                  },
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        'Sair',
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(width: 4),
+                      Icon(Icons.logout, color: Colors.red),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
       body: SingleChildScrollView(
@@ -39,7 +137,7 @@ class SellerHomePage extends StatelessWidget {
               seller.homeImage,
               width: MediaQuery.of(context).size.width,
               height: 240,
-              fit: BoxFit.cover, 
+              fit: BoxFit.cover,
             ),
             Padding(
               padding: const EdgeInsets.only(left: 32.0, top: 32.0),
@@ -81,10 +179,7 @@ class SellerHomePage extends StatelessWidget {
               padding: const EdgeInsets.only(left: 32, top: 8),
               child: Row(
                 children: [
-                  Icon(
-                    Icons.star,
-                    color: Color(0xFFF2C305),
-                  ),
+                  Icon(Icons.star, color: Color(0xFFF2C305)),
                   SizedBox(width: 4),
                   Text(
                     '${seller.rating}',
@@ -98,9 +193,7 @@ class SellerHomePage extends StatelessWidget {
                 ],
               ),
             ),
-            TextSection(
-              description: seller.description,
-            ),
+            TextSection(description: seller.description),
             SizedBox(height: 16),
             GestureDetector(
               onTap: () {
@@ -113,7 +206,11 @@ class SellerHomePage extends StatelessWidget {
               onTap: () {
                 context.go(QRCodeGeneratorScreen.route(sellerId));
               },
-              child: Image.asset('assets/QRcodebutton.png', width: 350, height: 50),
+              child: Image.asset(
+                'assets/QRcodebutton.png',
+                width: 350,
+                height: 50,
+              ),
             ),
             SizedBox(height: 16),
           ],
@@ -131,7 +228,7 @@ class TextSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 32), 
+      padding: const EdgeInsets.symmetric(horizontal: 32),
       child: Text(
         description,
         style: TextStyle(
