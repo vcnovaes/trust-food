@@ -1,14 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import 'package:trust_food/src/home/presentation/seller_home.dart';
+import 'package:trust_food/src/mock-data/mock_data.dart';
+import 'package:web/web.dart' as web;
 
 class QRCodeGeneratorScreen extends StatelessWidget {
-  static String route() => '/qrcode/generator';
+  final String sellerId;
 
-  const QRCodeGeneratorScreen({super.key});
+  const QRCodeGeneratorScreen({super.key, required this.sellerId});
+
+  static String route(String sellerId) => '/qrcode/generator/$sellerId';
+
+  String getBaseUrl() {
+    return web.window.location.origin;
+  }
 
   @override
   Widget build(BuildContext context) {
+    final seller = mockSellers.firstWhere((s) => s.id == sellerId);
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -16,9 +27,9 @@ class QRCodeGeneratorScreen extends StatelessWidget {
         elevation: 0,
         iconTheme: IconThemeData(color: Colors.black),
         leading: IconButton(
-          icon: Image.asset('assets/left_arrow.png', height: 24, width: 24),
+          icon: Image.asset('assets/left_arrow.png', height: 45, width: 45),
           onPressed: () {
-            context.go(SellerHomePage.route());
+            context.go(SellerHomePage.route(sellerId));
           },
         ),
       ),
@@ -32,7 +43,7 @@ class QRCodeGeneratorScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Coco do Seu Gustavo",
+                    seller.businessName,
                     style: TextStyle(
                       fontFamily: 'Roboto',
                       fontSize: 20,
@@ -60,11 +71,11 @@ class QRCodeGeneratorScreen extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.only(top: 100.0),
-            child: Center(
-              child: Image.asset(
-                'assets/qr_code_2.png',
-                height: 200,
-                width: 500,
+            child: QrImageView(
+              data: getBaseUrl() + SellerHomePage.route(seller.id),
+              size: 230,
+              embeddedImageStyle: const QrEmbeddedImageStyle(
+                size: Size(500, 200),
               ),
             ),
           ),

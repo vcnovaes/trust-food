@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:trust_food/src/home/presentation/buyer_home.dart';
-import 'package:trust_food/src/home/presentation/seller_home.dart';
 import 'package:trust_food/src/login/domain/usecase/login_usecase.dart';
 import 'package:trust_food/src/login/login_provider.dart';
 import 'package:trust_food/src/shared/design/assets/trust_food_images.dart';
@@ -123,7 +122,7 @@ class LoginScreenState extends ConsumerState<LoginScreen> {
     state.loginRequestStatus.maybeMap(
       orElse: () {
         if (_email == "seller@email.com") {
-          context.go(SellerHomePage.route());
+          context.go(BuyerHomePage.route());
         } else {
           context.go(BuyerHomePage.route());
         }

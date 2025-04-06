@@ -9,8 +9,11 @@ class HomeRoutes {
       builder: (context, _) => const BuyerHomePage(),
     ),
     GoRoute(
-      path: SellerHomePage.route(),
-      builder: (context, _) => const SellerHomePage(),
+      path: '/seller_home/:sellerId',
+      builder: (context, state) {
+        final sellerId = state.pathParameters['sellerId']!;
+        return SellerHomePage(sellerId: sellerId);
+      },
     ),
   ];
 }

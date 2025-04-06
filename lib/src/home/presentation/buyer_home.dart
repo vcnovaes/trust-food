@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
-import 'package:trust_food/src/home/domain/models/user_model.dart';
+import 'package:latlong2/latlong.dart';
+import 'package:trust_food/src/mock-data/mock_data.dart';
 import 'package:trust_food/src/qrcode/presentation/qr_code_scanner.dart';
+import 'package:trust_food/src/selection/presentation/select_user.dart';
 // import 'package:trust_food/utils/firestore_test_service.dart'; // Import da função Teste
 
 class BuyerHomePage extends StatefulWidget {
@@ -14,41 +18,31 @@ class BuyerHomePage extends StatefulWidget {
 }
 
 class BuyerHomePageState extends State<BuyerHomePage> {
-  final bool _showAmbulantes = false;
+  final MapController _mapController = MapController();
+  LatLng? _currentPosition;
 
-  List<UserModel> users = [
-    UserModel(
-      email: "gustavo.lins10@gmail.com",
-      phone: "99996666",
-      firstName: "Gustavo",
-      lastName: "Lins",
-      userType: "Comerciante",
-    ),
-    UserModel(
-      email: "albertob@gmail.com",
-      phone: "99996666",
-      firstName: "Alberto",
-      lastName: "Bomfim",
-      userType: "Consumidor",
-    ),
-  ];
+  @override
+  void initState() {
+    super.initState();
+    _determinePosition();
+  }
 
-  List<UserModel> get recommendedUsers =>
-      users.where((user) => user.userType == "Comerciante").toList();
+  Future<void> _determinePosition() async {
+    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) return;
 
-  // // TESTE - conexão com Firebase
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   // Chama a função para carregar todos os ambulantes do Firebase quando a página for carregada
-  //   getAllVendors();
-  // }
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) return;
+    }
+    if (permission == LocationPermission.deniedForever) return;
 
-  void _toggleAmbulantes() {
-    // nothing
-    // nothing
-    // nothing
-    // nothing
+    Position position = await Geolocator.getCurrentPosition();
+    setState(() {
+      _currentPosition = LatLng(position.latitude, position.longitude);
+      _mapController.move(_currentPosition!, 15);
+    });
   }
 
   @override
@@ -56,95 +50,126 @@ class BuyerHomePageState extends State<BuyerHomePage> {
     return Scaffold(
       body: Stack(
         children: [
-          Positioned.fill(
-            child: Image.asset('assets/map_home_user.png', fit: BoxFit.cover),
-          ),
-        ],
-      ),
-      bottomNavigationBar: Container(
-        color: Color(0xFFE2EAF0),
-        padding: EdgeInsets.symmetric(vertical: 20),
-        height: 180,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            GestureDetector(
-              onTap: _toggleAmbulantes,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset('assets/ambulante.png', width: 24, height: 24),
-                  SizedBox(width: 8),
-                  Text(
-                    "Ambulantes por Perto",
-                    style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF0F5FA6),
+          FlutterMap(
+            mapController: _mapController,
+            options: MapOptions(
+              maxZoom: 18.0,
+              minZoom: 4.0,
+            ),
+            children: [
+              TileLayer(
+                urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                userAgentPackageName: 'com.example.app',
+              ),
+              MarkerLayer(
+                markers: [
+                  Marker(
+                    width: 50,
+                    height: 50,
+                    point: LatLng(-8.062160, -34.870700),
+                    child: GestureDetector(
+                      onTap: () {
+                        context.go('/home-buyer-to-seller/1');
+                      },
+                      child: Image.asset(
+                        'assets/seller_point_map.png',
+                        width: 40,
+                        height: 40,
+                      ),
+                    ),
+                  ),
+
+                  Marker(
+                    width: 50,
+                    height: 50,
+                    point: LatLng(-8.063050, -34.871650),
+                    child: GestureDetector(
+                      onTap: () {
+                        context.go('/home-buyer-to-seller/2');
+                      },
+                      child: Image.asset(
+                        'assets/seller_point_map.png',
+                        width: 40,
+                        height: 40,
+                      ),
+                    ),
+                  ),
+
+                  Marker(
+                    width: 50,
+                    height: 50,
+                    point: LatLng(-8.060206, -34.881325),
+                    child: GestureDetector(
+                      onTap: () {
+                        context.go('/home-buyer-to-seller/3');
+                      },
+                      child: Image.asset(
+                        'assets/seller_point_map.png',
+                        width: 40,
+                        height: 40,
+                      ),
+                    ),
+                  ),
+
+                  Marker(
+                    width: 50,
+                    height: 50,
+                    point: LatLng(-8.062800, -34.879100),
+                    child: GestureDetector(
+                      onTap: () {
+                        context.go('/home-buyer-to-seller/4');
+                      },
+                      child: Image.asset(
+                        'assets/seller_point_map.png',
+                        width: 40,
+                        height: 40,
+                      ),
                     ),
                   ),
                 ],
-              ),
-            ),
-            if (_showAmbulantes) ...[
-              SizedBox(height: 10),
-              Expanded(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: recommendedUsers.length,
-                  itemBuilder: (context, index) {
-                    final user = recommendedUsers[index];
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 4,
-                      ),
-                      child: Text(
-                        "${user.firstName} ${user.lastName}",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontFamily: 'Roboto',
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black87,
-                        ),
-                      ),
-                    );
-                  },
-                ),
               ),
             ],
-            SizedBox(height: 12),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFF0F5FA6),
-                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-              ),
-              onPressed: () {
-                context.go(QRCodeScannerScreen.route());
+          ),
+          Positioned(
+            top: 20,
+            left: 20,
+            child: GestureDetector(
+              onTap: () {
+                context.go(SelectUser.route());
               },
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Image.asset('assets/qr_code_1.png', width: 24, height: 24),
-                  SizedBox(width: 8),
-                  Text(
-                    "Ler QR Code",
-                    style: TextStyle(
-                      fontFamily: 'Roboto',
-                      color: Colors.white,
-                      fontSize: 18,
-                    ),
-                  ),
-                ],
+              child: Image.asset(
+                'assets/log_out_button.png',
+                width: 50,
+                height: 60,
               ),
             ),
-          ],
-        ),
+          ),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              height: 200,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/retangulo.png'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child: Center(
+                child: GestureDetector(
+                  onTap: () {
+                    context.go(QRCodeScannerScreen.route());
+                  },
+                  child: Image.asset(
+                    'assets/ler_QR_Code_Button.png',
+                    width: 350,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
