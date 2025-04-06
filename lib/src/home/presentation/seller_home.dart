@@ -78,8 +78,10 @@ class SellerHomePage extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () {
+                            context.go('/seller_profile/${seller.id}');
                             // TODO: Add navigation to account details if needed
                           },
+
                           child: Text(
                             'Detalhes da conta',
                             style: TextStyle(

@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:trust_food/src/home/domain/models/user_model.dart';
+import 'package:trust_food/src/mock-data/mock_data.dart';
 import 'package:trust_food/src/profile/presentation/seller_review_screen.dart';
 
 class SellerProfileScreen extends StatelessWidget {
-  static String route() => '/seller/profile';
+  static String route(String sellerId) => '/seller_profile/$sellerId';
 
-  const SellerProfileScreen({super.key});
+  final Seller seller;
 
+  const SellerProfileScreen({super.key, required this.seller});
   @override
   Widget build(BuildContext context) {
     UserModel seller = UserModel(
