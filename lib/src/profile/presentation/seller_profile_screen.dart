@@ -22,9 +22,23 @@ class SellerProfileScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Detalhes da conta'),
+        title: const Text(
+          'Detalhes da conta',
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 20,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
         centerTitle: true,
         automaticallyImplyLeading: false,
+        backgroundColor: Colors.white,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.blueAccent),
+          onPressed: () {
+            context.pop();
+          },
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
