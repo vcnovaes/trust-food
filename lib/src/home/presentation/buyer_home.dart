@@ -195,7 +195,7 @@ class BuyerHomePageState extends State<BuyerHomePage> {
                     point: LatLng(-8.062160, -34.870700),
                     child: GestureDetector(
                       onTap: () {
-                        context.go('/home-buyer-to-seller/1');
+                        context.go('/seller_home/1');
                       },
                       child: Image.asset(
                         'assets/seller_point_map.png',
@@ -211,7 +211,7 @@ class BuyerHomePageState extends State<BuyerHomePage> {
                     point: LatLng(-8.063050, -34.871650),
                     child: GestureDetector(
                       onTap: () {
-                        context.go('/home-buyer-to-seller/2');
+                        context.go('/seller_home/2');
                       },
                       child: Image.asset(
                         'assets/seller_point_map.png',
@@ -227,7 +227,7 @@ class BuyerHomePageState extends State<BuyerHomePage> {
                     point: LatLng(-8.060206, -34.881325),
                     child: GestureDetector(
                       onTap: () {
-                        context.go('/home-buyer-to-seller/3');
+                        context.go('/seller_home/3');
                       },
                       child: Image.asset(
                         'assets/seller_point_map.png',
@@ -243,7 +243,7 @@ class BuyerHomePageState extends State<BuyerHomePage> {
                     point: LatLng(-8.062800, -34.879100),
                     child: GestureDetector(
                       onTap: () {
-                        context.go('/home-buyer-to-seller/4');
+                        context.go('/seller_home/4');
                       },
                       child: Image.asset(
                         'assets/seller_point_map.png',
