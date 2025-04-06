@@ -12,12 +12,8 @@ class SellerRoutes {
         final sellerId =
             state
                 .pathParameters['sellerId']!; // Extract sellerId from the route
-        final seller = mockSellers.firstWhere(
-          (s) => s.id == sellerId,
-        ); // Find the Seller object
-        return SellerProfileScreen(
-          seller: seller,
-        ); // Pass sellerId to the screen
+        final seller = mockSellers.firstWhere((s) => s.id == sellerId);
+        return SellerProfileScreen(seller: seller);
       },
     ),
     GoRoute(
