@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
-import 'package:trust_food/src/home/presentation/buyer_home.dart';
 
 class QRCodeScannerScreen extends StatelessWidget {
-  static String route() => '/qrcode/scanner';
+  static String route(String userId) => '/qrcode/scanner/$userId';
 
-  const QRCodeScannerScreen({super.key});
+  final String userId;
+
+  const QRCodeScannerScreen({super.key, required this.userId});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          // Camera Scanner
           MobileScanner(
             onDetect: (capture) {
               final List<Barcode> barcodes = capture.barcodes;
@@ -24,10 +24,10 @@ class QRCodeScannerScreen extends StatelessWidget {
           ),
 
           Container(
-            color: Colors.black.withValues(alpha: (0.5 * 255).toDouble()),
+            color: Colors.black.withOpacity(0.5),
           ),
 
-          Positioned(
+          const Positioned(
             top: 180,
             left: 0,
             right: 0,
@@ -58,7 +58,7 @@ class QRCodeScannerScreen extends StatelessWidget {
             left: 16,
             child: GestureDetector(
               onTap: () {
-                context.go(BuyerHomePage.route());
+                context.go('/buyer_home/$userId');
               },
               child: Image.asset('assets/voltar.png', width: 100, height: 100),
             ),

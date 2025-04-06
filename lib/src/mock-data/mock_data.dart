@@ -16,6 +16,22 @@ class User {
   });
 }
 
+class Review {
+  final String id;
+  final String userId;
+  final String sellerId;
+  final String comment;
+  final double rating;
+
+  Review({
+    required this.id,
+    required this.userId,
+    required this.sellerId,
+    required this.comment,
+    required this.rating,
+  });
+}
+
 class Seller extends User {
   final String businessName;
   final double rating;
@@ -90,7 +106,7 @@ List<Seller> mockSellers = [
     email: 'churrosdaneide@email.com',
     phone: '99239-7744',
     userType: 'Vendedor',
-    canMove: false,
+    canMove: true,
     open: true,
     businessName: 'Churros da Neide',
     rating: 5,
@@ -108,7 +124,7 @@ List<Seller> mockSellers = [
     email: 'laridoacai@email.com',
     phone: '98765-4433',
     userType: 'Vendedor',
-     canMove: false,
+    canMove: false,
     open: true,
     businessName: 'Lari do Açaí',
     rating: 4.8,
@@ -137,5 +153,29 @@ List<User> mockUsers = [
     email: 'maria.oliveira@email.com',
     phone: '99999-5678',
     userType: 'Consumidor',
+  ),
+];
+
+List<Review> mockReviews = [
+  Review(
+    id: '1',
+    userId: '3',
+    sellerId: '1',
+    comment: 'Ótimo pastel, muito saboroso!',
+    rating: 5,
+  ),
+  Review(
+    id: '2',
+    userId: '4',
+    sellerId: '2',
+    comment: 'Milho muito bom, recomendo!',
+    rating: 4.5,
+  ),
+  Review(
+    id: '3',
+    userId: '3',
+    sellerId: '3',
+    comment: 'Churros deliciosos, voltarei com certeza!',
+    rating: 5,
   ),
 ];

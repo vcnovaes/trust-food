@@ -5,14 +5,17 @@ import 'package:trust_food/src/qrcode/presentation/qr_code_scanner.dart';
 class QrCodeRoutes {
   static final routes = [
     GoRoute(
-      path: QRCodeScannerScreen.route(),
-      builder: (context, _) => const QRCodeScannerScreen(),
+      path: '/qrcode/scanner/:userId',
+      builder: (context, state) {
+        final userId = state.pathParameters['userId']!;
+        return QRCodeScannerScreen(userId: userId);
+      },
     ),
     GoRoute(
-      path: QRCodeGeneratorScreen.route(':sellerId'), 
+      path: QRCodeGeneratorScreen.route(':sellerId'),
       builder: (context, state) {
         final sellerId = state.pathParameters['sellerId']!;
-        return QRCodeGeneratorScreen(sellerId: sellerId); 
+        return QRCodeGeneratorScreen(sellerId: sellerId);
       },
     ),
   ];
