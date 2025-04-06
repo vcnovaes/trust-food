@@ -26,12 +26,12 @@ class Seller extends User {
   final String qrCodeLink;
 
   Seller({
-    required String id,
-    required String firstName,
-    required String lastName,
-    required String email,
-    required String phone,
-    required String userType,
+    required super.id,
+    required super.firstName,
+    required super.lastName,
+    required super.email,
+    required super.phone,
+    required super.userType,
     required this.businessName,
     required this.rating,
     required this.homeImage,
@@ -39,14 +39,7 @@ class Seller extends User {
     required this.galleryImage2,
     required this.description,
     required this.qrCodeLink,
-  }) : super(
-         id: id,
-         firstName: firstName,
-         lastName: lastName,
-         email: email,
-         phone: phone,
-         userType: userType,
-       );
+  });
 }
 
 List<Seller> mockSellers = [
