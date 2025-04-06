@@ -24,6 +24,8 @@ class Seller extends User {
   final String galleryImage2;
   final String description;
   final String qrCodeLink;
+  bool canMove;
+  bool open;
 
   Seller({
     required super.id,
@@ -39,6 +41,8 @@ class Seller extends User {
     required this.galleryImage2,
     required this.description,
     required this.qrCodeLink,
+    required this.canMove,
+    required this.open,
   });
 }
 
@@ -50,6 +54,8 @@ List<Seller> mockSellers = [
     email: 'gustavo.lins10@gmail.com',
     phone: '99999-1111',
     userType: 'Vendedor',
+    canMove: false,
+    open: true,
     businessName: 'Pastel do Seu Gustavo',
     rating: 4,
     homeImage: 'assets/pastel_do_seu_gustavo_home.png',
@@ -66,6 +72,8 @@ List<Seller> mockSellers = [
     email: 'milhodoze@gmail.com',
     phone: '99999-2501',
     userType: 'Vendedor',
+    canMove: false,
+    open: true,
     businessName: 'Milho do Zé',
     rating: 5,
     homeImage: 'assets/milho_do_ze_home.png',
@@ -82,6 +90,8 @@ List<Seller> mockSellers = [
     email: 'churrosdaneide@email.com',
     phone: '99239-7744',
     userType: 'Vendedor',
+    canMove: false,
+    open: true,
     businessName: 'Churros da Neide',
     rating: 5,
     homeImage: 'assets/churros_da_neide_home.png',
@@ -98,6 +108,8 @@ List<Seller> mockSellers = [
     email: 'laridoacai@email.com',
     phone: '98765-4433',
     userType: 'Vendedor',
+     canMove: false,
+    open: true,
     businessName: 'Lari do Açaí',
     rating: 4.8,
     homeImage: 'assets/lari_do_acai_home.png',

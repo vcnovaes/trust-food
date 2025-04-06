@@ -5,17 +5,22 @@ import 'package:trust_food/src/mock-data/mock_data.dart';
 import 'package:trust_food/src/gallery/presentation/gallery.dart';
 import 'package:trust_food/src/selection/presentation/select_user.dart';
 
-class SellerHomePage extends StatelessWidget {
+class SellerHomePage extends StatefulWidget {
   static String route(String sellerId) => '/seller_home/$sellerId';
 
   final String sellerId;
-
   const SellerHomePage({super.key, required this.sellerId});
+  
+  SellerHomePageState createState() => SellerHomePageState();
+  
+}
 
+class SellerHomePageState extends State<SellerHomePage>{
+  
   @override
   Widget build(BuildContext context) {
-    final seller = mockSellers.firstWhere((s) => s.id == sellerId);
-
+    String sellerId = widget.sellerId;
+    var seller = mockSellers.firstWhere((s) => s.id == sellerId);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -63,17 +68,59 @@ class SellerHomePage extends StatelessWidget {
               padding: const EdgeInsets.only(left: 32),
               child: Row(
                 children: [
-                  Text(
-                    'Aberto',
-                    style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF123859),
+                  Row(
+                    children: [
+                      Text(
+                      'Aberto',
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF123859),
+                      ),
                     ),
+                    SizedBox(width: 5),
+                    Switch(
+                      value: seller.open,
+                      activeColor: Colors.green,
+                      onChanged: (bool value) {
+                        setState((){
+                          seller.open = value;
+                          mockSellers.firstWhere((s) => s.id == sellerId).open = seller.open;
+                        });
+                      },
+                    )
+
+                    ]
                   ),
-                  SizedBox(width: 5),
-                  Image.asset('assets/toggle_on.png', height: 35, width: 35),
+                   Row(
+                    children: [
+                      SizedBox(width: 10),
+                      Text(
+                        'Pode Mover-se',
+                        style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF123859),
+                        ),
+                      ),
+                      SizedBox(width: 5),
+                      Switch(
+                        value: seller.canMove,
+                        activeColor: Colors.green,
+                        onChanged: (bool value) {
+                          setState((){
+                            seller.canMove = value;
+                            mockSellers.firstWhere((s) => s.id == sellerId).canMove = seller.canMove;
+                          });
+                        },
+                      )
+
+                    ]
+                  ),
+
+                  
                 ],
               ),
             ),
@@ -122,7 +169,6 @@ class SellerHomePage extends StatelessWidget {
     );
   }
 }
-
 class TextSection extends StatelessWidget {
   const TextSection({super.key, required this.description});
 
