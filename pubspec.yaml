@@ -117,6 +117,12 @@ flutter:
     - assets/pastel_do_seu_gustavo_home.png
     - assets/pastel_do_seu_gustavo_gallery_1.png
     - assets/pastel_do_seu_gustavo_gallery_2.png
+    - assets/churros_da_neide_home.png
+    - assets/churros_da_neide_gallery_1.png
+    - assets/churros_da_neide_gallery_2.png
+    - assets/lari_do_acai_home.png
+    - assets/lari_do_acai_gallery_1.png
+    - assets/lari_do_acai_gallery_2.png
     - assets/gallery.png
     - assets/toggle_on.png
     - assets/log_out_button.png
