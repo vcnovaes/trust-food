@@ -1,28 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:trust_food/src/home/domain/models/user_model.dart';
+import 'package:trust_food/src/mock-data/mock_data.dart';
 import 'package:trust_food/src/profile/presentation/seller_review_screen.dart';
 
 class SellerProfileScreen extends StatelessWidget {
-  static String route() => '/seller/profile';
+  static String route(String sellerId) => '/seller_profile/$sellerId';
 
-  const SellerProfileScreen({super.key});
+  final Seller seller;
 
+  const SellerProfileScreen({super.key, required this.seller});
   @override
   Widget build(BuildContext context) {
-    UserModel seller = UserModel(
-      email: "gustavo.lins10@gmail.com",
-      phone: "99996666",
-      firstName: "Gustavo",
-      lastName: "Lins",
-      userType: "Comerciante",
-    );
-
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Detalhes da conta'),
+        title: const Text(
+          'Detalhes da conta',
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 20,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
         centerTitle: true,
         automaticallyImplyLeading: false,
+        backgroundColor: Colors.white,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.blueAccent),
+          onPressed: () {
+            context.pop();
+          },
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
@@ -73,7 +80,7 @@ class SellerProfileScreen extends StatelessWidget {
             label,
             style: const TextStyle(
               color: Colors.grey,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.bold,
             ),
           ),
           const SizedBox(width: 16),
