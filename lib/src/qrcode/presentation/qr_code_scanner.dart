@@ -3,11 +3,9 @@ import 'package:go_router/go_router.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 class QRCodeScannerScreen extends StatelessWidget {
-  static String route(String userId) => '/qrcode/scanner/$userId';
+  static String route() => '/qrcode/scanner';
 
-  final String userId;
-
-  const QRCodeScannerScreen({super.key, required this.userId});
+  const QRCodeScannerScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +20,9 @@ class QRCodeScannerScreen extends StatelessWidget {
               }
             },
           ),
-
           Container(
             color: Colors.black.withOpacity(0.5),
           ),
-
           const Positioned(
             top: 180,
             left: 0,
@@ -41,7 +37,6 @@ class QRCodeScannerScreen extends StatelessWidget {
               ),
             ),
           ),
-
           Center(
             child: Container(
               width: 250,
@@ -52,13 +47,12 @@ class QRCodeScannerScreen extends StatelessWidget {
               ),
             ),
           ),
-
           Positioned(
             top: 40,
             left: 16,
             child: GestureDetector(
               onTap: () {
-                context.go('/buyer_home/$userId');
+                context.go('/buyer_home');
               },
               child: Image.asset('assets/voltar.png', width: 100, height: 100),
             ),

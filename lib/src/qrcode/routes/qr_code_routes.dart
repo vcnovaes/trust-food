@@ -5,10 +5,9 @@ import 'package:trust_food/src/qrcode/presentation/qr_code_scanner.dart';
 class QrCodeRoutes {
   static final routes = [
     GoRoute(
-      path: '/qrcode/scanner/:userId',
+      path: QRCodeScannerScreen.route(),
       builder: (context, state) {
-        final userId = state.pathParameters['userId']!;
-        return QRCodeScannerScreen(userId: userId);
+        return const QRCodeScannerScreen();
       },
     ),
     GoRoute(

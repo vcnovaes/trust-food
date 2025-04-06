@@ -104,7 +104,7 @@ class SelectUserState extends State<SelectUser> {
         if (userType == 'Vendedor') {
           context.go('/seller_home/$userId');
         } else {
-          context.go('/buyer_home/$userId');
+          context.go('/buyer_home');
         }
       },
     );
