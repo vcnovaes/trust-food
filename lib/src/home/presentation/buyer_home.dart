@@ -3,7 +3,6 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:trust_food/src/home/presentation/seller_home.dart';
 import 'package:trust_food/src/mock-data/mock_data.dart';
 import 'package:trust_food/src/qrcode/presentation/qr_code_scanner.dart';
 import 'package:trust_food/src/selection/presentation/select_user.dart';
@@ -42,7 +41,7 @@ class BuyerHomePageState extends State<BuyerHomePage> {
     Position position = await Geolocator.getCurrentPosition();
     setState(() {
       _currentPosition = LatLng(position.latitude, position.longitude);
-      _mapController.move(_currentPosition!, 30);
+      _mapController.move(_currentPosition!, 15);
     });
   }
 
@@ -53,38 +52,82 @@ class BuyerHomePageState extends State<BuyerHomePage> {
         children: [
           FlutterMap(
             mapController: _mapController,
-            options: MapOptions(maxZoom: 18.0, minZoom: 4.0),
+            options: MapOptions(
+              maxZoom: 18.0,
+              minZoom: 4.0,
+            ),
             children: [
               TileLayer(
                 urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                 userAgentPackageName: 'com.example.app',
               ),
-              if (_currentPosition != null)
-                MarkerLayer(
-                  markers:
-                      mockSellers.asMap().entries.map((entry) {
-                        final index = entry.key;
-                        final seller = entry.value;
-                        return Marker(
-                          width: 50,
-                          height: 50,
-                          point: LatLng(
-                            _currentPosition!.latitude + (index * 0.001),
-                            _currentPosition!.longitude + (index * 0.001),
-                          ),
-                          child: GestureDetector(
-                            onTap: () {
-                              context.go('/home-buyer-to-seller/${seller.id}');
-                            },
-                            child: Image.asset(
-                              'assets/seller_point_map.png',
-                              width: 40,
-                              height: 40,
-                            ),
-                          ),
-                        );
-                      }).toList(),
-                ),
+              MarkerLayer(
+                markers: [
+                  Marker(
+                    width: 50,
+                    height: 50,
+                    point: LatLng(-8.062160, -34.870700),
+                    child: GestureDetector(
+                      onTap: () {
+                        context.go('/home-buyer-to-seller/1');
+                      },
+                      child: Image.asset(
+                        'assets/seller_point_map.png',
+                        width: 40,
+                        height: 40,
+                      ),
+                    ),
+                  ),
+
+                  Marker(
+                    width: 50,
+                    height: 50,
+                    point: LatLng(-8.063050, -34.871650),
+                    child: GestureDetector(
+                      onTap: () {
+                        context.go('/home-buyer-to-seller/2');
+                      },
+                      child: Image.asset(
+                        'assets/seller_point_map.png',
+                        width: 40,
+                        height: 40,
+                      ),
+                    ),
+                  ),
+
+                  Marker(
+                    width: 50,
+                    height: 50,
+                    point: LatLng(-8.060206, -34.881325),
+                    child: GestureDetector(
+                      onTap: () {
+                        context.go('/home-buyer-to-seller/3');
+                      },
+                      child: Image.asset(
+                        'assets/seller_point_map.png',
+                        width: 40,
+                        height: 40,
+                      ),
+                    ),
+                  ),
+
+                  Marker(
+                    width: 50,
+                    height: 50,
+                    point: LatLng(-8.062800, -34.879100),
+                    child: GestureDetector(
+                      onTap: () {
+                        context.go('/home-buyer-to-seller/4');
+                      },
+                      child: Image.asset(
+                        'assets/seller_point_map.png',
+                        width: 40,
+                        height: 40,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
           Positioned(

@@ -153,13 +153,6 @@ import 'package:trust_food/src/buyer-to-seller/presentation/gallery_buyer_to_sel
                child: Image.asset('assets/gallery.png', width: 350, height: 50),
              ),
              const SizedBox(height: 16),
-             GestureDetector(
-               onTap: () {
-                 context.go('/qrcode-generator-buyer-to-seller/$sellerId');
-               },
-               child: Image.asset('assets/QRcodebutton.png', width: 350, height: 50),
-             ),
-             const SizedBox(height: 16),
            ],
          ),
        ),
