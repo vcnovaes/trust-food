@@ -90,7 +90,7 @@ List<Seller> mockSellers = [
     email: 'churrosdaneide@email.com',
     phone: '99239-7744',
     userType: 'Vendedor',
-    canMove: false,
+    canMove: true,
     open: true,
     businessName: 'Churros da Neide',
     rating: 5,
