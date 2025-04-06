@@ -20,15 +20,75 @@ class SellerHomePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
         leading: GestureDetector(
           onTap: () {
             context.go(SelectUser.route());
           },
           child: Padding(
             padding: const EdgeInsets.only(left: 16.0),
-            child: Image.asset('assets/log_out_button.png', height: 55, width: 55),
+            child: Image.asset(
+              'assets/log_out_button.png',
+              height: 55,
+              width: 55,
+            ),
           ),
+        ),
+        actions: [
+          Builder(
+            builder:
+                (context) => IconButton(
+                  icon: Icon(
+                    Icons.menu,
+                    color: Color(0xFF123859),
+                  ), // Hamburger icon
+                  onPressed: () {
+                    Scaffold.of(context).openEndDrawer(); // Open the end drawer
+                  },
+                ),
+          ),
+        ],
+      ),
+      endDrawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(color: Color(0xFF123859)),
+              child: Text(
+                'Menu',
+                style: TextStyle(color: Colors.white, fontSize: 24),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text('Home'),
+              onTap: () {
+                Navigator.pop(context); // Close the drawer
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.photo),
+              title: Text('Gallery'),
+              onTap: () {
+                context.go(GalleryScreen.route(sellerId));
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.qr_code),
+              title: Text('QR Code Generator'),
+              onTap: () {
+                context.go(QRCodeGeneratorScreen.route(sellerId));
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.logout),
+              title: Text('Logout'),
+              onTap: () {
+                context.go(SelectUser.route());
+              },
+            ),
+          ],
         ),
       ),
       body: SingleChildScrollView(
@@ -39,7 +99,7 @@ class SellerHomePage extends StatelessWidget {
               seller.homeImage,
               width: MediaQuery.of(context).size.width,
               height: 240,
-              fit: BoxFit.cover, 
+              fit: BoxFit.cover,
             ),
             Padding(
               padding: const EdgeInsets.only(left: 32.0, top: 32.0),
@@ -81,10 +141,7 @@ class SellerHomePage extends StatelessWidget {
               padding: const EdgeInsets.only(left: 32, top: 8),
               child: Row(
                 children: [
-                  Icon(
-                    Icons.star,
-                    color: Color(0xFFF2C305),
-                  ),
+                  Icon(Icons.star, color: Color(0xFFF2C305)),
                   SizedBox(width: 4),
                   Text(
                     '${seller.rating}',
@@ -98,9 +155,7 @@ class SellerHomePage extends StatelessWidget {
                 ],
               ),
             ),
-            TextSection(
-              description: seller.description,
-            ),
+            TextSection(description: seller.description),
             SizedBox(height: 16),
             GestureDetector(
               onTap: () {
@@ -113,7 +168,11 @@ class SellerHomePage extends StatelessWidget {
               onTap: () {
                 context.go(QRCodeGeneratorScreen.route(sellerId));
               },
-              child: Image.asset('assets/QRcodebutton.png', width: 350, height: 50),
+              child: Image.asset(
+                'assets/QRcodebutton.png',
+                width: 350,
+                height: 50,
+              ),
             ),
             SizedBox(height: 16),
           ],
@@ -131,7 +190,7 @@ class TextSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 32), 
+      padding: const EdgeInsets.symmetric(horizontal: 32),
       child: Text(
         description,
         style: TextStyle(
