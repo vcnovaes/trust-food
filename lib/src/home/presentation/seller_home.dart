@@ -50,43 +50,79 @@ class SellerHomePage extends StatelessWidget {
         ],
       ),
       endDrawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
+        child: Column(
           children: [
-            DrawerHeader(
-              decoration: BoxDecoration(color: Color(0xFF123859)),
-              child: Text(
-                'Menu',
-                style: TextStyle(color: Colors.white, fontSize: 24),
+            Container(
+              color: Color.fromARGB(255, 255, 255, 255),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 65),
+              width: double.infinity,
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    radius: 30,
+                    backgroundColor: Colors.blueAccent,
+                    child: Icon(Icons.person, color: Colors.white, size: 40),
+                  ),
+                  SizedBox(width: 16),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          seller.businessName,
+                          style: TextStyle(
+                            color: Colors.black45,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            // TODO: Add navigation to account details if needed
+                          },
+                          child: Text(
+                            'Detalhes da conta',
+                            style: TextStyle(
+                              color: Colors.lightBlueAccent,
+                              fontSize: 16,
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
-            ListTile(
-              leading: Icon(Icons.home),
-              title: Text('Home'),
-              onTap: () {
-                Navigator.pop(context); // Close the drawer
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.photo),
-              title: Text('Gallery'),
-              onTap: () {
-                context.go(GalleryScreen.route(sellerId));
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.qr_code),
-              title: Text('QR Code Generator'),
-              onTap: () {
-                context.go(QRCodeGeneratorScreen.route(sellerId));
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.logout),
-              title: Text('Logout'),
-              onTap: () {
-                context.go(SelectUser.route());
-              },
+            Expanded(
+              child: Container(),
+            ), // This pushes the logout to the bottom
+            Padding(
+              padding: const EdgeInsets.only(right: 16.0, bottom: 16),
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: GestureDetector(
+                  onTap: () {
+                    context.go(SelectUser.route());
+                  },
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        'Sair',
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(width: 4),
+                      Icon(Icons.logout, color: Colors.red),
+                    ],
+                  ),
+                ),
+              ),
             ),
           ],
         ),
