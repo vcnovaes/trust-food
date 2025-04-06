@@ -22,12 +22,12 @@ class SellerProfileScreen extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.blueAccent),
+          icon: Image.asset('assets/left_arrow.png', height: 45, width: 45),
           onPressed: () {
-            context.pop();
+            Navigator.pop(context);
           },
         ),
       ),
@@ -48,7 +48,7 @@ class SellerProfileScreen extends StatelessWidget {
             buildDetailRow('Telefone', seller.phone),
             const SizedBox(height: 32),
             TextButton.icon(
-              onPressed: (() => {context.go(SellerReviewsScreen.route())}),
+              onPressed: (() => {context.pop()}),
               icon: const Icon(Icons.delete, color: Colors.red),
               label: const Text(
                 'Deletar conta',
@@ -57,7 +57,8 @@ class SellerProfileScreen extends StatelessWidget {
             ),
             const SizedBox(height: 32),
             TextButton.icon(
-              onPressed: (() => {context.go(SellerReviewsScreen.route())}),
+              onPressed:
+                  (() => {context.push(SellerReviewsScreen.route(seller.id))}),
 
               icon: const Icon(Icons.message, color: Colors.blue),
               label: const Text(

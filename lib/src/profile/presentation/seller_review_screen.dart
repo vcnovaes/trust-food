@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class SellerReviewsScreen extends StatelessWidget {
-  static String route() => '/seller/reviews';
+  static String route(String sellerId) => '/reviews/$sellerId';
+  String sellerId;
 
-  const SellerReviewsScreen({super.key});
+  SellerReviewsScreen({super.key, required this.sellerId});
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +41,25 @@ class SellerReviewsScreen extends StatelessWidget {
     ];
 
     return Scaffold(
-      appBar: AppBar(automaticallyImplyLeading: false),
-
+      appBar: AppBar(
+        title: const Text(
+          'Avaliações recebidas',
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 20,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        centerTitle: true,
+        automaticallyImplyLeading: true,
+        backgroundColor: Colors.white,
+        leading: IconButton(
+          icon: Image.asset('assets/left_arrow.png', height: 45, width: 45),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(

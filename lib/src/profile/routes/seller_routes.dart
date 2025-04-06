@@ -17,8 +17,11 @@ class SellerRoutes {
       },
     ),
     GoRoute(
-      path: SellerReviewsScreen.route(),
-      builder: (context, _) => const SellerReviewsScreen(),
+      path: '/reviews/:sellerId',
+      builder: (context, state) {
+        final sellerId = state.pathParameters['sellerId']!;
+        return SellerReviewsScreen(sellerId: sellerId);
+      },
     ),
   ];
 }
