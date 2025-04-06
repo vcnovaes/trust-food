@@ -6,7 +6,6 @@ import 'package:latlong2/latlong.dart';
 import 'package:trust_food/src/mock-data/mock_data.dart';
 import 'package:trust_food/src/qrcode/presentation/qr_code_scanner.dart';
 import 'package:trust_food/src/selection/presentation/select_user.dart';
-// import 'package:trust_food/utils/firestore_test_service.dart'; // Import da função Teste
 
 class BuyerHomePage extends StatefulWidget {
   static String route() => '/buyer_home';

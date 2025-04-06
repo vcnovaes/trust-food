@@ -13,7 +13,6 @@ class QRCodeScannerScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          // Camera Scanner
           MobileScanner(
             onDetect: (capture) {
               final List<Barcode> barcodes = capture.barcodes;
