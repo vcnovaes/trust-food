@@ -89,6 +89,7 @@ List<Seller> mockSellers = [
     galleryImage2: 'assets/churros_da_neide_gallery_2.png',
     description:
         'Parada obrigatória pra quem passa pelo Parque 13 de Maio! Churros de diversos sabores',
+    qrCodeLink: '',
   ),
     Seller(
     id: '4',
@@ -104,6 +105,7 @@ List<Seller> mockSellers = [
     galleryImage2: 'assets/lari_do_acai_gallery_2.png',
     description:
         'Açaí geladinho, venha experimentar! Perfeito pro calor de Recife.',
+    qrCodeLink: '',
   ),
 ];
 
