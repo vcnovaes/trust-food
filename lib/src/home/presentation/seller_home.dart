@@ -48,7 +48,7 @@ class SellerHomePageState extends State<SellerHomePage> {
                     'assets/profile_button.png',
                     height: 55,
                     width: 55,
-                  ), // Hamburger icon
+                  ), 
                   onPressed: () {
                     Scaffold.of(context).openEndDrawer(); // Open the end drawer
                   },
@@ -115,29 +115,6 @@ class SellerHomePageState extends State<SellerHomePage> {
                 right: 16.0,
                 bottom: 40,
               ), // Adjusted bottom padding to move it higher
-              child: Align(
-                alignment: Alignment.bottomRight,
-                child: GestureDetector(
-                  onTap: () {
-                    context.push(SelectUser.route());
-                  },
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        'Sair',
-                        style: TextStyle(
-                          color: Colors.red,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(width: 4),
-                      Icon(Icons.logout, color: Colors.red),
-                    ],
-                  ),
-                ),
-              ),
             ),
           ],
         ),
