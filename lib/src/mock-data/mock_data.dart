@@ -39,7 +39,6 @@ class Seller extends User {
   final String galleryImage1;
   final String galleryImage2;
   final String description;
-  final String qrCodeLink;
   bool canMove;
   bool open;
 
@@ -56,7 +55,6 @@ class Seller extends User {
     required this.galleryImage1,
     required this.galleryImage2,
     required this.description,
-    required this.qrCodeLink,
     required this.canMove,
     required this.open,
   });
@@ -79,7 +77,6 @@ List<Seller> mockSellers = [
     galleryImage2: 'assets/pastel_do_seu_gustavo_gallery_2.png',
     description:
         'Aqui no Pastel do Seu Gustavo, você vai saborear os pastéis mais crocantes e recheados da cidade!',
-    qrCodeLink: '',
   ),
   Seller(
     id: '2',
@@ -97,7 +94,6 @@ List<Seller> mockSellers = [
     galleryImage2: 'assets/milho_do_ze_gallery_2.png',
     description:
         'Aqui é o Zé! Meu milho é sempre fresquinho, cozido na hora. Venha provar o melhor milho da cidade!',
-    qrCodeLink: '',
   ),
   Seller(
     id: '3',
@@ -115,7 +111,6 @@ List<Seller> mockSellers = [
     galleryImage2: 'assets/churros_da_neide_gallery_2.png',
     description:
         'Parada obrigatória pra quem passa pelo Parque 13 de Maio! Churros de diversos sabores',
-    qrCodeLink: '',
   ),
   Seller(
     id: '4',
@@ -133,7 +128,6 @@ List<Seller> mockSellers = [
     galleryImage2: 'assets/lari_do_acai_gallery_2.png',
     description:
         'Açaí geladinho, venha experimentar! Perfeito pro calor de Recife.',
-    qrCodeLink: "www.google.com",
   ),
 ];
 

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trust_food/src/mock-data/mock_data.dart';
 import 'package:go_router/go_router.dart';
-import 'package:trust_food/src/home/presentation/seller_home.dart';
 
 class GalleryScreen extends StatelessWidget {
   static String route(String sellerId) => '/gallery/products/$sellerId';
@@ -23,36 +22,51 @@ class GalleryScreen extends StatelessWidget {
         leading: IconButton(
           icon: Image.asset('assets/left_arrow.png', height: 45, width: 45),
           onPressed: () {
-            context.go(SellerHomePage.route(sellerId));
+            context.pop();
           },
         ),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 14.0, top: 16.0),
-            child: Text(
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
               seller.businessName,
               style: const TextStyle(
                 fontFamily: 'Roboto',
-                fontSize: 20,
+                fontSize: 24,
                 fontWeight: FontWeight.bold,
                 color: Color(0xFF123859),
               ),
             ),
-          ),
-          const SizedBox(height: 20),
-          Center(
-            child: Column(
-              children: [
-                Image.asset(seller.galleryImage1, width: 400, height: 250, fit: BoxFit.cover),
-                const SizedBox(height: 30),
-                Image.asset(seller.galleryImage2, width: 400, height: 250, fit: BoxFit.cover),
-              ],
+            const SizedBox(height: 20),
+            Expanded(
+              child: GridView.count(
+                crossAxisCount: 2,
+                crossAxisSpacing: 8,
+                mainAxisSpacing: 8,
+                children: [
+                  _buildGalleryImage(seller.galleryImage1),
+                  _buildGalleryImage(seller.galleryImage2),
+                  // Add more images if needed
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildGalleryImage(String imagePath) {
+    return GestureDetector(
+      onTap: () {
+        // Implement lightbox effect or image viewer
+      },
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(8),
+        child: Image.asset(imagePath, fit: BoxFit.cover),
       ),
     );
   }
