@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:trust_food/src/mock-data/mock_data.dart';
 
 class SellerReviewsScreen extends StatelessWidget {
@@ -49,7 +50,7 @@ class SellerReviewsScreen extends StatelessWidget {
         leading: IconButton(
           icon: Image.asset('assets/left_arrow.png', height: 45, width: 45),
           onPressed: () {
-            Navigator.pop(context);
+            context.pop();
           },
         ),
       ),

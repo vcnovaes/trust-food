@@ -27,7 +27,7 @@ class SellerProfileScreen extends StatelessWidget {
         leading: IconButton(
           icon: Image.asset('assets/left_arrow.png', height: 50, width: 45),
           onPressed: () {
-            Navigator.pop(context);
+            context.pop();
           },
         ),
       ),

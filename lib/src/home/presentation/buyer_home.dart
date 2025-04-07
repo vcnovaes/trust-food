@@ -3,8 +3,8 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:trust_food/src/login/presentation/login_screen.dart';
 import 'package:trust_food/src/qrcode/presentation/qr_code_scanner.dart';
-import 'package:trust_food/src/selection/presentation/select_user.dart';
 
 class UserProfileDrawer extends StatelessWidget {
   final String username;
@@ -152,7 +152,7 @@ class BuyerHomePageState extends State<BuyerHomePage> {
                     point: LatLng(-8.062160, -34.870700),
                     child: GestureDetector(
                       onTap: () {
-                        context.go('/seller_home/1');
+                        context.go('/seller_detail/1');
                       },
                       child: Image.asset(
                         'assets/seller_point_map.png',
@@ -167,7 +167,7 @@ class BuyerHomePageState extends State<BuyerHomePage> {
                     point: LatLng(-8.063050, -34.871650),
                     child: GestureDetector(
                       onTap: () {
-                        context.go('/seller_home/2');
+                        context.go('/seller_detail/2');
                       },
                       child: Image.asset(
                         'assets/seller_point_map.png',
@@ -182,7 +182,7 @@ class BuyerHomePageState extends State<BuyerHomePage> {
                     point: LatLng(-8.060206, -34.881325),
                     child: GestureDetector(
                       onTap: () {
-                        context.go('/seller_home/3');
+                        context.go('/seller_detail/3');
                       },
                       child: Image.asset(
                         'assets/seller_point_map.png',
@@ -197,7 +197,7 @@ class BuyerHomePageState extends State<BuyerHomePage> {
                     point: LatLng(-8.062800, -34.879100),
                     child: GestureDetector(
                       onTap: () {
-                        context.go('/seller_home/4');
+                        context.go('/seller_detail/4');
                       },
                       child: Image.asset(
                         'assets/seller_point_map.png',
@@ -215,7 +215,7 @@ class BuyerHomePageState extends State<BuyerHomePage> {
             left: 20,
             child: GestureDetector(
               onTap: () {
-                context.go(SelectUser.route());
+                context.go(LoginScreen.route());
               },
               child: Image.asset(
                 'assets/log_out_button.png',

@@ -65,7 +65,7 @@ class TrustFoodApp extends ConsumerWidget {
     next.maybeWhen(
       orElse: () {},
       signedOut: () {
-        context.go('/selectuser');
+        context.go('/login');
       },
     );
   }

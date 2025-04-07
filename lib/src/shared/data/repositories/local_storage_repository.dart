@@ -1,12 +1,13 @@
 import 'package:convenience_types/errors/storage_error.dart';
 import 'package:convenience_types/types/maybe.dart';
 import 'package:convenience_types/types/result.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:trust_food/src/shared/data/errors/local_storage_erros.dart';
 import 'package:trust_food/src/shared/data/miscelaneous/storage_keys.dart';
+import 'package:universal_html/html.dart' as html;
 
 class LocalStorageRepository {
-  final FlutterSecureStorage _secureStorage = FlutterSecureStorage();
+  // Use web localStorage
+  final storage = html.window.localStorage;
 
   LocalStorageRepository();
 
@@ -15,7 +16,7 @@ class LocalStorageRepository {
 
   Future<Result> delete({required StorageKey key}) async {
     try {
-      await _secureStorage.delete(key: key.keyName);
+      storage.remove(key.keyName);
       return const Success(true);
     } catch (e) {
       return Failure(StorageUnknownError(msg: 'Failed to delete key'));
@@ -24,7 +25,7 @@ class LocalStorageRepository {
 
   Future<Result> deleteAll() async {
     try {
-      await _secureStorage.deleteAll();
+      storage.clear();
       _token = null;
       return const Success(true);
     } catch (e) {
@@ -34,7 +35,7 @@ class LocalStorageRepository {
 
   Future<Result<String>> read({required StorageKey key}) async {
     try {
-      String? value = await _secureStorage.read(key: key.keyName);
+      String? value = storage[key.keyName];
       if (key == StorageKey.authToken && _token == null) {
         _token = value;
       }
@@ -53,16 +54,20 @@ class LocalStorageRepository {
     Maybe<String> value = const Nothing(),
   }) async {
     try {
-      await _secureStorage.write(
-        key: key.keyName,
-        value: value.getOrElse(null),
+      final String valueToStore = value.when(
+        just: (val) => val,
+        nothing: () => '',
       );
-      if (key == StorageKey.authToken && _token == null) {
-        _token = value.getOrElse('');
+
+      storage[key.keyName] = valueToStore;
+
+      if (key == StorageKey.authToken) {
+        _token = valueToStore;
       }
+
       return const Success(true);
     } catch (e) {
-      return Failure(StorageUnknownError(msg: 'Failed to write key'));
+      return Failure(StorageUnknownError(msg: 'Failed to write key: $e'));
     }
   }
 }

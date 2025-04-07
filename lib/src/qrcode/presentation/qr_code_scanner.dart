@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:trust_food/src/seller_detail/presentation/seller_detail_screen.dart';
 
 class QRCodeScannerScreen extends StatelessWidget {
   static String route() => '/qrcode/scanner';
@@ -16,13 +17,14 @@ class QRCodeScannerScreen extends StatelessWidget {
             onDetect: (capture) {
               final List<Barcode> barcodes = capture.barcodes;
               for (final barcode in barcodes) {
-                context.go('${barcode.rawValue}');
+                final sellerId = barcode.rawValue;
+                if (sellerId != null) {
+                  context.go(SellerDetailScreen.route(sellerId));
+                }
               }
             },
           ),
-          Container(
-            color: Colors.black.withOpacity(0.5),
-          ),
+          Container(color: Colors.black.withValues(alpha: 0.5)),
           const Positioned(
             top: 180,
             left: 0,

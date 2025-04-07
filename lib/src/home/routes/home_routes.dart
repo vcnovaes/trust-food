@@ -11,10 +11,9 @@ class HomeRoutes {
       },
     ),
     GoRoute(
-      path: '/seller_home/:sellerId',
+      path: '/seller_home',
       builder: (context, state) {
-        final sellerId = state.pathParameters['sellerId']!;
-        return SellerHomePage(sellerId: sellerId);
+        return SellerHomePage();
       },
     ),
   ];

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:trust_food/src/home/presentation/seller_home.dart';
 import 'package:trust_food/src/mock-data/mock_data.dart';
+import 'package:trust_food/src/seller_detail/presentation/seller_detail_screen.dart';
 import 'package:web/web.dart' as web;
 
 class QRCodeGeneratorScreen extends StatelessWidget {
@@ -29,7 +29,7 @@ class QRCodeGeneratorScreen extends StatelessWidget {
         leading: IconButton(
           icon: Image.asset('assets/left_arrow.png', height: 45, width: 45),
           onPressed: () {
-            context.go(SellerHomePage.route(sellerId));
+            context.pop();
           },
         ),
       ),
@@ -72,7 +72,7 @@ class QRCodeGeneratorScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 100.0),
             child: QrImageView(
-              data: getBaseUrl() + SellerHomePage.route(seller.id),
+              data: getBaseUrl() + SellerDetailScreen.route(seller.id),
               size: 230,
               embeddedImageStyle: const QrEmbeddedImageStyle(
                 size: Size(500, 200),
