@@ -16,6 +16,22 @@ class User {
   });
 }
 
+class Review {
+  final String id;
+  final String userId;
+  final String sellerId;
+  final String comment;
+  final double rating;
+
+  Review({
+    required this.id,
+    required this.userId,
+    required this.sellerId,
+    required this.comment,
+    required this.rating,
+  });
+}
+
 class Seller extends User {
   final String businessName;
   final double rating;
@@ -23,7 +39,6 @@ class Seller extends User {
   final String galleryImage1;
   final String galleryImage2;
   final String description;
-  final String qrCodeLink;
   bool canMove;
   bool open;
 
@@ -40,7 +55,6 @@ class Seller extends User {
     required this.galleryImage1,
     required this.galleryImage2,
     required this.description,
-    required this.qrCodeLink,
     required this.canMove,
     required this.open,
   });
@@ -57,13 +71,12 @@ List<Seller> mockSellers = [
     canMove: false,
     open: true,
     businessName: 'Pastel do Seu Gustavo',
-    rating: 4,
+    rating: 5,
     homeImage: 'assets/pastel_do_seu_gustavo_home.png',
     galleryImage1: 'assets/pastel_do_seu_gustavo_gallery_1.png',
     galleryImage2: 'assets/pastel_do_seu_gustavo_gallery_2.png',
     description:
         'Aqui no Pastel do Seu Gustavo, você vai saborear os pastéis mais crocantes e recheados da cidade!',
-    qrCodeLink: '',
   ),
   Seller(
     id: '2',
@@ -81,7 +94,6 @@ List<Seller> mockSellers = [
     galleryImage2: 'assets/milho_do_ze_gallery_2.png',
     description:
         'Aqui é o Zé! Meu milho é sempre fresquinho, cozido na hora. Venha provar o melhor milho da cidade!',
-    qrCodeLink: '',
   ),
   Seller(
     id: '3',
@@ -90,7 +102,7 @@ List<Seller> mockSellers = [
     email: 'churrosdaneide@email.com',
     phone: '99239-7744',
     userType: 'Vendedor',
-    canMove: false,
+    canMove: true,
     open: true,
     businessName: 'Churros da Neide',
     rating: 5,
@@ -99,7 +111,6 @@ List<Seller> mockSellers = [
     galleryImage2: 'assets/churros_da_neide_gallery_2.png',
     description:
         'Parada obrigatória pra quem passa pelo Parque 13 de Maio! Churros de diversos sabores',
-    qrCodeLink: '',
   ),
   Seller(
     id: '4',
@@ -108,7 +119,7 @@ List<Seller> mockSellers = [
     email: 'laridoacai@email.com',
     phone: '98765-4433',
     userType: 'Vendedor',
-     canMove: false,
+    canMove: false,
     open: true,
     businessName: 'Lari do Açaí',
     rating: 4.8,
@@ -117,7 +128,6 @@ List<Seller> mockSellers = [
     galleryImage2: 'assets/lari_do_acai_gallery_2.png',
     description:
         'Açaí geladinho, venha experimentar! Perfeito pro calor de Recife.',
-    qrCodeLink: "www.google.com",
   ),
 ];
 
@@ -137,5 +147,43 @@ List<User> mockUsers = [
     email: 'maria.oliveira@email.com',
     phone: '99999-5678',
     userType: 'Consumidor',
+  ),
+];
+
+List<Review> mockReviews = [
+  Review(
+    id: '1',
+    userId: '3',
+    sellerId: '1',
+    comment: 'Ótimo pastel, muito saboroso!',
+    rating: 5,
+  ),
+  Review(
+    id: '2',
+    userId: '4',
+    sellerId: '2',
+    comment: 'Milho muito bom, recomendo!',
+    rating: 5,
+  ),
+  Review(
+    id: '3',
+    userId: '3',
+    sellerId: '3',
+    comment: 'Churros deliciosos, voltarei com certeza!',
+    rating: 5,
+  ),
+  Review(
+    id: '4',
+    userId: '4',
+    sellerId: '4',
+    comment: 'Açaí muito bom!',
+    rating: 4.8,
+  ),
+  Review(
+    id: '5',
+    userId: '4',
+    sellerId: '3',
+    comment: 'Os melhores churros que já provei!',
+    rating: 5,
   ),
 ];

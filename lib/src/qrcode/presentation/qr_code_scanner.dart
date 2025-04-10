@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
-import 'package:trust_food/src/home/presentation/buyer_home.dart';
+import 'package:trust_food/src/seller_detail/presentation/seller_detail_screen.dart';
 
 class QRCodeScannerScreen extends StatelessWidget {
   static String route() => '/qrcode/scanner';
@@ -13,21 +13,19 @@ class QRCodeScannerScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          // Camera Scanner
           MobileScanner(
             onDetect: (capture) {
               final List<Barcode> barcodes = capture.barcodes;
               for (final barcode in barcodes) {
-                context.go('${barcode.rawValue}');
+                final sellerId = barcode.rawValue;
+                if (sellerId != null) {
+                  context.go(SellerDetailScreen.route(sellerId));
+                }
               }
             },
           ),
-
-          Container(
-            color: Colors.black.withValues(alpha: (0.5 * 255).toDouble()),
-          ),
-
-          Positioned(
+          Container(color: Colors.black.withValues(alpha: 0.5)),
+          const Positioned(
             top: 180,
             left: 0,
             right: 0,
@@ -41,7 +39,6 @@ class QRCodeScannerScreen extends StatelessWidget {
               ),
             ),
           ),
-
           Center(
             child: Container(
               width: 250,
@@ -52,13 +49,12 @@ class QRCodeScannerScreen extends StatelessWidget {
               ),
             ),
           ),
-
           Positioned(
             top: 40,
             left: 16,
             child: GestureDetector(
               onTap: () {
-                context.go(BuyerHomePage.route());
+                context.go('/buyer_home');
               },
               child: Image.asset('assets/voltar.png', width: 100, height: 100),
             ),

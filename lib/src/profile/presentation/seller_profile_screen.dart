@@ -22,10 +22,10 @@ class SellerProfileScreen extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.blueAccent),
+          icon: Image.asset('assets/left_arrow.png', height: 50, width: 45),
           onPressed: () {
             context.pop();
           },
@@ -37,18 +37,18 @@ class SellerProfileScreen extends StatelessWidget {
           children: [
             const CircleAvatar(
               radius: 40,
-              backgroundColor: Colors.blue,
+              backgroundColor: Color(0xFF0F5FA6),
               child: Icon(Icons.person, size: 50, color: Colors.white),
             ),
             const SizedBox(height: 24),
             buildDetailRow('Nome', "${seller.firstName} ${seller.lastName}"),
-            const Divider(),
+            const Divider(color: Color(0xFFD9D9D9)),
             buildDetailRow('Email', seller.email),
-            const Divider(),
+            const Divider(color: Color(0xFFD9D9D9)),
             buildDetailRow('Telefone', seller.phone),
             const SizedBox(height: 32),
             TextButton.icon(
-              onPressed: (() => {context.go(SellerReviewsScreen.route())}),
+              onPressed: (() => {context.pop()}),
               icon: const Icon(Icons.delete, color: Colors.red),
               label: const Text(
                 'Deletar conta',
@@ -57,12 +57,13 @@ class SellerProfileScreen extends StatelessWidget {
             ),
             const SizedBox(height: 32),
             TextButton.icon(
-              onPressed: (() => {context.go(SellerReviewsScreen.route())}),
+              onPressed:
+                  (() => {context.push(SellerReviewsScreen.route(seller.id))}),
 
-              icon: const Icon(Icons.message, color: Colors.blue),
+              icon: const Icon(Icons.message, color: Color(0xFF0F5FA6)),
               label: const Text(
                 'Ver avaliações',
-                style: TextStyle(color: Colors.blue),
+                style: TextStyle(color: Color(0xFF0F5FA6)),
               ),
             ),
           ],
